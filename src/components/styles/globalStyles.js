@@ -27,15 +27,17 @@ body {
 `;
 
 export const lightTheme = {
-  body: '#fff',
-  text: '#2E3337',
+  body: '#FFF',
+  text: '#36393E',
   secondary: '#F2F3F5',
   accent: '#D3D7DC',
+  hovertxt: '#000',
 };
 
 export const darkTheme = {
   text: '#DCDDDE',
   body: '#36393E',
-  secondary: '#2E3136',
-  accent: '#393C42',
+  secondary: '#202225',
+  accent: '#2E3136',
+  hovertxt: '#FFF',
 };
