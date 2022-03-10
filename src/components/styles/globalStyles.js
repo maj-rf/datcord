@@ -29,15 +29,19 @@ body {
 export const lightTheme = {
   body: '#FFF',
   text: '#36393E',
-  secondary: '#F2F3F5',
-  accent: '#D3D7DC',
+  secondary: '#D3D7DC',
+  accent: '#F2F3F5',
   hovertxt: '#000',
+  hoverbg: '#E7EAED',
+  form: '#EAEDEF',
 };
 
 export const darkTheme = {
-  text: '#DCDDDE',
   body: '#36393E',
+  text: '#DCDDDE',
   secondary: '#202225',
   accent: '#2E3136',
   hovertxt: '#FFF',
+  hoverbg: '#33363C',
+  form: '#40444A',
 };
