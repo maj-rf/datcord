@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledNav = styled.nav`
   height: 100vh;
   background-color: ${(props) => props.theme.secondary};
-  padding: 1rem;
+  padding: 0.5rem;
 
   ul {
     display: flex;

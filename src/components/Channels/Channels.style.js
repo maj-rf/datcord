@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const ChannelSection = styled.section`
   background-color: ${(props) => props.theme.accent};
-  flex: 0 0 200px;
-
+  flex: 0 0 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   ul {
     display: flex;
     flex-direction: column;
@@ -13,6 +15,14 @@ export const ChannelSection = styled.section`
     li {
       padding: 0.25rem;
       cursor: pointer;
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+
+      span {
+        color: #6e7278;
+        font-size: 1.2rem;
+        vertical-align: middle;
+      }
     }
     & li:hover {
       background-color: ${(props) => props.theme.hoverbg};
