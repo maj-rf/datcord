@@ -37,7 +37,6 @@ const StyledMain = styled.main`
 function App() {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  const [logState, setLogState] = useState(false);
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPass, setRegisterPass] = useState('');
   const [loginEmail, setLoginEmail] = useState('');
@@ -55,7 +54,6 @@ function App() {
         registerEmail,
         registerPass
       );
-      setLogState(true);
       console.log(user);
     } catch (error) {
       console.log(error.message);
@@ -68,7 +66,6 @@ function App() {
         loginEmail,
         loginPass
       );
-      setLogState(true);
       console.log(user);
     } catch (error) {
       console.log(error.message);
@@ -76,7 +73,6 @@ function App() {
   };
   const logout = async () => {
     await signOut(auth);
-    setLogState(false);
   };
 
   return (
