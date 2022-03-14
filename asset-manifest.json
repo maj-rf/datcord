@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/datcord/static/css/main.cca2e1d6.css",
+    "main.js": "/datcord/static/js/main.8b4df8aa.js",
+    "index.html": "/datcord/index.html",
+    "main.cca2e1d6.css.map": "/datcord/static/css/main.cca2e1d6.css.map",
+    "main.8b4df8aa.js.map": "/datcord/static/js/main.8b4df8aa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cca2e1d6.css",
+    "static/js/main.8b4df8aa.js"
+  ]
+}
