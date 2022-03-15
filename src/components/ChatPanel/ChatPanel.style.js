@@ -5,8 +5,15 @@ export const ChatSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  margin: 1rem;
+  ul {
+    overflow-y: auto;
 
+    li {
+      display: flex;
+      gap: 1rem;
+    }
+  }
   input {
     font-size: 1.2rem;
     min-width: 100%;

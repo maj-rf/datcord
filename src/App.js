@@ -1,10 +1,6 @@
-import {
-  GlobalStyles,
-  lightTheme,
-  darkTheme,
-} from './components/styles/globalStyles';
+import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
-import useDarkMode from './components/hooks/useDarkMode';
+import useDarkMode from './hooks/useDarkMode';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar/Sidebar';
 import Channels from './components/Channels/Channels';
@@ -13,6 +9,7 @@ import UserPanel from './components/UserPanel/UserPanel';
 import { useRef, useState } from 'react';
 import { signup, login, logout, useAuth } from './firebase-config';
 const Wrapper = styled.div`
+  height: 100vh;
   display: flex;
   ul,
   li,
