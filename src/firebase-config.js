@@ -9,6 +9,7 @@ import {
   signInAnonymously,
 } from 'firebase/auth';
 import { useState, useEffect } from 'react';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyDlVBZydTdLMMxm-YMSrCOCxe8_9bD5KbU',
   authDomain: 'datcord-ef16b.firebaseapp.com',

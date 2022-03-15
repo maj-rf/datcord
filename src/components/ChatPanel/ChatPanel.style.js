@@ -5,10 +5,9 @@ export const ChatSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1rem;
+  padding: 1rem;
   ul {
     overflow-y: auto;
-
     li {
       display: flex;
       gap: 1rem;

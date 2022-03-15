@@ -8,6 +8,7 @@ import ChatPanel from './components/ChatPanel/ChatPanel';
 import UserPanel from './components/UserPanel/UserPanel';
 import { useRef, useState } from 'react';
 import { signup, login, logout, useAuth } from './firebase-config';
+
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
@@ -73,7 +74,7 @@ function App() {
             <StyledMain>
               <Channels user={user} logout={handleLogout} loading={loading} />
               <ChatPanel />
-              <UserPanel />
+              <UserPanel user={user} />
             </StyledMain>
           </>
         ) : (
