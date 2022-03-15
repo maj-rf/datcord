@@ -1,7 +1,7 @@
 import { ChannelSection } from './Channels.style';
 import React from 'react';
 
-function Channels({ user, logout }) {
+function Channels({ user, logout, loading }) {
   return (
     <ChannelSection>
       <div>
@@ -41,7 +41,7 @@ function Channels({ user, logout }) {
       <div>
         <p>{user?.email}</p>
         {/* ^ checks if user.email exists and show if true */}
-        <button onClick={logout}>Logout</button>
+        <button onClick={logout}>{loading ? '...' : 'Logout'}</button>
       </div>
     </ChannelSection>
   );

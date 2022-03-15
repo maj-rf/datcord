@@ -10,14 +10,8 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Channels from './components/Channels/Channels';
 import ChatPanel from './components/ChatPanel/ChatPanel';
 import UserPanel from './components/UserPanel/UserPanel';
-import { useState } from 'react';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth';
-import { auth } from './firebase-config';
+import { useRef, useState } from 'react';
+import { signup, login, logout, useAuth } from './firebase-config';
 const Wrapper = styled.div`
   display: flex;
   ul,
@@ -37,43 +31,40 @@ const StyledMain = styled.main`
 function App() {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  const [registerEmail, setRegisterEmail] = useState('');
-  const [registerPass, setRegisterPass] = useState('');
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPass, setLoginPass] = useState('');
-  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const user = useAuth();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  async function handleSignup() {
+    setLoading(true);
+    try {
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch (err) {
+      alert(err);
+    }
+    setLoading(false);
+  }
 
-  const register = async () => {
+  async function handleLogin() {
+    setLoading(true);
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPass
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
+      await login(emailRef.current.value, passwordRef.current.value);
+    } catch (err) {
+      alert(err);
     }
-  };
-  const login = async () => {
+    setLoading(false);
+  }
+
+  async function handleLogout() {
+    setLoading(true);
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPass
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
+      await logout();
+    } catch (err) {
+      alert(err);
     }
-  };
-  const logout = async () => {
-    await signOut(auth);
-  };
+    setLoading(false);
+  }
 
   return (
     <Wrapper>
@@ -83,37 +74,25 @@ function App() {
           <>
             <Sidebar toggleTheme={toggleTheme} />
             <StyledMain>
-              <Channels user={user} logout={logout} />
+              <Channels user={user} logout={handleLogout} loading={loading} />
               <ChatPanel />
               <UserPanel />
             </StyledMain>
           </>
         ) : (
           <div>
-            <div>
-              <p>Register</p>
-              <input
-                placeholder="Email..."
-                onChange={(e) => setRegisterEmail(e.target.value)}
-              />
-              <input
-                placeholder="Password..."
-                onChange={(e) => setRegisterPass(e.target.value)}
-              />
-              <button onClick={register}>Create User</button>
+            <div className="fields">
+              <input ref={emailRef} placeholder="Email" />
+              <input ref={passwordRef} type="password" placeholder="Password" />
             </div>
-            <div>
-              <p>Sign-In</p>
-              <input
-                placeholder="Email..."
-                onChange={(e) => setLoginEmail(e.target.value)}
-              />
-              <input
-                placeholder="Password..."
-                onChange={(e) => setLoginPass(e.target.value)}
-              />
-              <button onClick={login}>Log-in</button>
-            </div>
+            {loading ? (
+              <div>Logging In...</div>
+            ) : (
+              <>
+                <button onClick={handleSignup}>Sign Up</button>
+                <button onClick={handleLogin}>Log In</button>
+              </>
+            )}
           </div>
         )}
       </ThemeProvider>
