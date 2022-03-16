@@ -1,100 +1,180 @@
 import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
 import { ThemeProvider } from 'styled-components';
 import useDarkMode from './hooks/useDarkMode';
-import styled from 'styled-components';
 import Sidebar from './components/Sidebar/Sidebar';
 import Channels from './components/Channels/Channels';
 import ChatPanel from './components/ChatPanel/ChatPanel';
 import UserPanel from './components/UserPanel/UserPanel';
-import { useRef, useState } from 'react';
-import { signup, login, logout, useAuth } from './firebase-config';
+import { useState } from 'react';
+import { Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom';
+import {
+  useUserAuth,
+  UserAuthContextProvider,
+} from './context/UserAuthContext';
 
-const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
-  ul,
-  li,
-  h3 {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+//checks if user is Authenticated
+function ProtectedRoute({ children }) {
+  let { user } = useUserAuth();
+  if (!user) {
+    <Navigate to="/" />;
   }
-`;
+  return children;
+}
 
-const StyledMain = styled.main`
-  display: flex;
-  width: 100%;
-`;
+function Home({ toggleTheme }) {
+  return (
+    <>
+      <Sidebar toggleTheme={toggleTheme} />
+      <Channels />
+      <ChatPanel />
+      <UserPanel />
+    </>
+  );
+}
+
+function LogIn() {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    error: null,
+    loading: false,
+  });
+  const { logIn } = useUserAuth();
+  const { email, password, error, loading } = data;
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await logIn(email, password);
+      navigate('/home');
+    } catch (err) {
+      setData({ ...data, error: err.message });
+    }
+  };
+
+  return (
+    <section>
+      <form onSubmit={handleSubmit}>
+        <h1>Log In</h1>
+        <div>
+          <input
+            type="email"
+            onChange={handleChange}
+            placeholder="Email"
+            name="email"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            onChange={handleChange}
+            placeholder="Password"
+            name="password"
+          />
+        </div>
+        <div>
+          <button disabled={loading}>{loading ? 'Loading..' : 'Log In'}</button>
+        </div>
+        <div>
+          <p>
+            Don't have an account?<Link to="/signup">Sign Up</Link>
+          </p>
+        </div>
+        {error && <p>{error}</p>}
+      </form>
+    </section>
+  );
+}
+function Register() {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    error: null,
+    loading: false,
+  });
+  const { signUp } = useUserAuth();
+  const { email, password, error, loading } = data;
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signUp(email, password);
+      navigate('/');
+    } catch (err) {
+      setData({ ...data, error: err.message });
+    }
+  };
+
+  return (
+    <section>
+      <form onSubmit={handleSubmit}>
+        <h1>Create an Account</h1>
+        <div>
+          <input
+            type="email"
+            onChange={handleChange}
+            placeholder="Email"
+            name="email"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            onChange={handleChange}
+            placeholder="Password"
+            name="password"
+          />
+        </div>
+        <div>
+          <button disabled={loading}>
+            {loading ? 'Loading..' : 'Register'}
+          </button>
+        </div>
+        <div>
+          <p>
+            Already have an account?<Link to="/">Log In</Link>
+          </p>
+        </div>
+        {error && <p>{error}</p>}
+      </form>
+    </section>
+  );
+}
 
 function App() {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  const [loading, setLoading] = useState(false);
-  const user = useAuth();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-
-  async function handleSignup() {
-    setLoading(true);
-    try {
-      await signup(emailRef.current.value, passwordRef.current.value);
-    } catch (err) {
-      alert(err);
-    }
-    setLoading(false);
-  }
-
-  async function handleLogin() {
-    setLoading(true);
-    try {
-      await login(emailRef.current.value, passwordRef.current.value);
-    } catch (err) {
-      alert(err);
-    }
-    setLoading(false);
-  }
-
-  async function handleLogout() {
-    setLoading(true);
-    try {
-      await logout();
-    } catch (err) {
-      alert(err);
-    }
-    setLoading(false);
-  }
 
   return (
-    <Wrapper>
+    <>
       <ThemeProvider theme={themeMode}>
         <GlobalStyles />
-        {user ? (
-          <>
-            <Sidebar toggleTheme={toggleTheme} />
-            <StyledMain>
-              <Channels user={user} logout={handleLogout} loading={loading} />
-              <ChatPanel />
-              <UserPanel user={user} />
-            </StyledMain>
-          </>
-        ) : (
-          <div>
-            <div className="fields">
-              <input ref={emailRef} placeholder="Email" />
-              <input ref={passwordRef} type="password" placeholder="Password" />
-            </div>
-            {loading ? (
-              <div>Logging In...</div>
-            ) : (
-              <>
-                <button onClick={handleSignup}>Sign Up</button>
-                <button onClick={handleLogin}>Log In</button>
-              </>
-            )}
-          </div>
-        )}
+        <UserAuthContextProvider>
+          <Routes>
+            <Route path="/" element={<LogIn />} />
+            <Route path="/signup" element={<Register />} />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home toggleTheme={toggleTheme} />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </UserAuthContextProvider>
       </ThemeProvider>
-    </Wrapper>
+    </>
   );
 }
 

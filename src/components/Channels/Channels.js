@@ -1,7 +1,18 @@
-import { ChannelSection } from './Channels.style';
 import React from 'react';
-
-function Channels({ user, logout, loading }) {
+import { ChannelSection } from './Channels.style';
+import { useUserAuth } from '../../context/UserAuthContext';
+import { useNavigate } from 'react-router-dom';
+function Channels() {
+  const { logOut, user } = useUserAuth();
+  const navigate = useNavigate();
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <ChannelSection>
       <div>
@@ -39,9 +50,9 @@ function Channels({ user, logout, loading }) {
         </ul>
       </div>
       <div>
-        <p>{user?.email}</p>
+        <p>{user && user.email}</p>
         {/* ^ checks if user.email exists and show if true */}
-        <button onClick={logout}>{loading ? '...' : 'Logout'}</button>
+        <button onClick={handleLogOut}>Logout</button>
       </div>
     </ChannelSection>
   );

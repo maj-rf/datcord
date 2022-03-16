@@ -23,31 +23,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
-export function signup(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password);
-}
-
-export function login(email, password) {
-  return signInWithEmailAndPassword(auth, email, password);
-}
-
-export function logout() {
-  return signOut(auth);
-}
-
-export function signinAsGuest() {
-  return signInAnonymously();
-}
-
-// Custom Hook
-export function useAuth() {
-  const [currentUser, setCurrentUser] = useState();
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
-    return unsub;
-  }, []);
-
-  return currentUser;
-}
