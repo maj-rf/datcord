@@ -4,6 +4,7 @@ import { useUserAuth } from '../../context/UserAuthContext';
 
 export default function Register() {
   const navigate = useNavigate();
+  const [visibility, setVisibility] = useState(false);
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -19,11 +20,13 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setData({ ...data, loading: true });
     try {
       await signUp(email, password);
+      setData({ ...data, loading: false });
       navigate('/');
     } catch (err) {
-      setData({ ...data, error: err.message });
+      setData({ ...data, error: err.message.substring(9) });
     }
   };
 
@@ -41,11 +44,17 @@ export default function Register() {
         </div>
         <div>
           <input
-            type="password"
+            type={visibility ? 'text' : 'password'}
             onChange={handleChange}
             placeholder="Password"
             name="password"
           />
+          <button
+            type="button"
+            onClick={() => setVisibility((prevState) => !prevState)}
+          >
+            Show
+          </button>
         </div>
         <div>
           <button disabled={loading}>

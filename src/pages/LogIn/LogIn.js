@@ -4,6 +4,7 @@ import { useUserAuth } from '../../context/UserAuthContext';
 
 export default function LogIn() {
   const navigate = useNavigate();
+  const [visibility, setVisibility] = useState(false);
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -19,11 +20,13 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setData({ ...data, loading: true });
     try {
       await logIn(email, password);
+      setData({ ...data, loading: false });
       navigate('/home');
     } catch (err) {
-      setData({ ...data, error: err.message });
+      setData({ ...data, error: err.message.substring(9) });
     }
   };
 
@@ -41,14 +44,22 @@ export default function LogIn() {
         </div>
         <div>
           <input
-            type="password"
+            type={visibility ? 'text' : 'password'}
             onChange={handleChange}
             placeholder="Password"
             name="password"
           />
+          <button
+            type="button"
+            onClick={() => setVisibility((prevState) => !prevState)}
+          >
+            Show
+          </button>
         </div>
         <div>
-          <button disabled={loading}>{loading ? 'Loading..' : 'Log In'}</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Loading..' : 'Log In'}
+          </button>
         </div>
         <div>
           <p>

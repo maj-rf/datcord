@@ -24,7 +24,29 @@ body {
 body {
   min-height: 100vh;
 }
-`;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+ul,
+ol,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: tomato;
+}`;
 
 export const lightTheme = {
   body: '#FFF',

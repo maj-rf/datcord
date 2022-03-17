@@ -16,7 +16,7 @@ A UserAuthContext that includes most Firebase's authentication methods
 const UserAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
 
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -31,7 +31,10 @@ export function UserAuthContextProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => setUser(user));
+    const unsub = onAuthStateChanged(auth, (currentUser) => {
+      console.log('Auth', currentUser);
+      setUser(currentUser);
+    });
     return () => unsub();
   }, []);
 
