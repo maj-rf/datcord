@@ -1,6 +1,8 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useUserAuth } from '../../context/UserAuthContext';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -22,7 +24,10 @@ export default function LogIn() {
     e.preventDefault();
     setData({ ...data, loading: true });
     try {
-      await logIn(email, password);
+      const res = await logIn(email, password);
+      await updateDoc(doc(db, 'users', res.user.uid), {
+        isOnline: true,
+      });
       setData({ ...data, loading: false });
       navigate('/home');
     } catch (err) {

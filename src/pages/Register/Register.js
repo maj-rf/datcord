@@ -1,7 +1,8 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useUserAuth } from '../../context/UserAuthContext';
-
+import { setDoc, doc, Timestamp } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 export default function Register() {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(false);
@@ -22,7 +23,13 @@ export default function Register() {
     e.preventDefault();
     setData({ ...data, loading: true });
     try {
-      await signUp(email, password);
+      const res = await signUp(email, password);
+      await setDoc(doc(db, 'users', res.user.uid), {
+        uid: res.user.uid,
+        email,
+        createdAt: Timestamp.fromDate(new Date()),
+        isOnline: false,
+      });
       setData({ ...data, loading: false });
       navigate('/');
     } catch (err) {

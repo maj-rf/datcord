@@ -2,12 +2,17 @@ import React from 'react';
 import { ChannelSection } from './Channels.style';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 function Channels() {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
   const handleLogOut = async () => {
     try {
       await logOut();
+      await updateDoc(doc(db, 'users', user.uid), {
+        isOnline: false,
+      });
       navigate('/');
     } catch (err) {
       console.log(err);
