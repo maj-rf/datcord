@@ -1,14 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  signInAnonymously,
-} from 'firebase/auth';
-import { useState, useEffect } from 'react';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDlVBZydTdLMMxm-YMSrCOCxe8_9bD5KbU',

@@ -7,6 +7,12 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase-config';
 
+/***
+A UserAuthContext that includes most Firebase's authentication methods 
+- signUp, logIn, logOut
+- onAuthChange that listens for user auth changes.
+-returns a ContextProvider Wrapper. 
+***/
 const UserAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
@@ -26,7 +32,7 @@ export function UserAuthContextProvider({ children }) {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
-    return unsub;
+    return () => unsub();
   }, []);
 
   return (
@@ -36,7 +42,6 @@ export function UserAuthContextProvider({ children }) {
   );
 }
 
-//custom Hook
 export function useUserAuth() {
   return useContext(UserAuthContext);
 }
