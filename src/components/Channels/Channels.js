@@ -57,7 +57,7 @@ function Channels() {
           </li>
         </ul>
       </div>
-      <div>
+      <div className="user-div">
         <p>{user && user.email}</p>
         {/* ^ checks if user.email exists and show if true */}
         <button onClick={handleLogOut}>Logout</button>
