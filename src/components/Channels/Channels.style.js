@@ -6,6 +6,12 @@ export const ChannelSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  .channel-head {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid ${(props) => props.theme.secondary};
+  }
+
   ul {
     display: flex;
     flex-direction: column;

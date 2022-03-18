@@ -56,7 +56,10 @@ export default function ChatPanel() {
   ];
   return (
     <ChatSection>
-      <h2># general</h2>
+      <div className="channel-name">
+        <h3># general</h3>
+      </div>
+
       <ul>
         <h1>Welcome to #general</h1>
         {chatData.map((user) => {
@@ -73,7 +76,7 @@ export default function ChatPanel() {
           );
         })}
       </ul>
-      <div>
+      <div className="msg-container">
         <input type="text" placeholder="Message..." />
       </div>
     </ChatSection>

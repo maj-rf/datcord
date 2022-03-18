@@ -21,7 +21,10 @@ function Channels() {
   return (
     <ChannelSection>
       <div>
-        <h3>Playground</h3>
+        <div className="channel-head">
+          <h3>Playground</h3>
+        </div>
+
         <ul>
           <span>v Text Channel</span>
           <li>
