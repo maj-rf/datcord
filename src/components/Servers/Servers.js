@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyledNav } from './Sidebar.style';
-function Sidebar(props) {
+import { StyledNav } from './Servers.style';
+function Servers(props) {
   return (
     <StyledNav>
       <ul>
@@ -24,4 +24,4 @@ function Sidebar(props) {
   );
 }
 
-export default Sidebar;
+export default Servers;

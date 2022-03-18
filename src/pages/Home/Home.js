@@ -1,4 +1,4 @@
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Servers from '../../components/Servers/Servers';
 import Channels from '../../components/Channels/Channels';
 import ChatPanel from '../../components/ChatPanel/ChatPanel';
 import UserPanel from '../../components/UserPanel/UserPanel';
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 export default function Home({ toggleTheme }) {
   return (
     <Wrapper>
-      <Sidebar toggleTheme={toggleTheme} />
+      <Servers toggleTheme={toggleTheme} />
       <Channels />
       <ChatPanel />
       <UserPanel />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserPanelSection } from './UserPanel.style';
+import User from './User';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 function UserPanel() {
@@ -10,16 +11,21 @@ function UserPanel() {
     });
     return unsub;
   }, []);
+
+  const online = [...currentUsers].filter((user) => user.isOnline);
+  const offline = [...currentUsers].filter((user) => user.isOnline === false);
   return (
     <UserPanelSection>
       <ul>
-        {currentUsers.map((x) => (
-          <li key={x.uid}>
-            <p>
-              <span>{x.isOnline ? 'ON ' : 'OFF '}</span>
-              {x.email}
-            </p>
-          </li>
+        <h3>Online</h3>
+        {online.map((x) => (
+          <User key={x.uid} x={x}></User>
+        ))}
+      </ul>
+      <ul>
+        <h3>Offline</h3>
+        {offline.map((x) => (
+          <User key={x.uid} x={x}></User>
         ))}
       </ul>
     </UserPanelSection>

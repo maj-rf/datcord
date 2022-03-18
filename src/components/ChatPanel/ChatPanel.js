@@ -54,6 +54,7 @@ export default function ChatPanel() {
       date: date.getTime() + 10,
     },
   ];
+
   return (
     <ChatSection>
       <div className="channel-name">
