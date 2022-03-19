@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChannelSection } from './Channels.style';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
-import { updateDoc, doc } from 'firebase/firestore';
+import { updateDoc, doc, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 function Channels() {
   const { logOut, user } = useUserAuth();
+  const [currentUsers, setCurrentUsers] = useState([]);
   const navigate = useNavigate();
   const handleLogOut = async () => {
     try {
@@ -18,6 +19,14 @@ function Channels() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
+      setCurrentUsers(snapshot.docs.map((doc) => doc.data()));
+    });
+    return unsub;
+  }, []);
+
   return (
     <ChannelSection>
       <div>
@@ -58,7 +67,7 @@ function Channels() {
         </ul>
       </div>
       <div className="user-div">
-        <p>{user && user.email}</p>
+        <p>{[...currentUsers].filter((x) => x.uid === user.uid)[0]?.name}</p>
         {/* ^ checks if user.email exists and show if true */}
         <button onClick={handleLogOut}>Logout</button>
       </div>

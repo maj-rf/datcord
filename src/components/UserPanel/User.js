@@ -5,7 +5,7 @@ function User({ x }) {
     <li>
       <div className="user-info">
         <div className={x.isOnline ? 'online ' : 'offline '}></div>
-        <p>{x.email}</p>
+        <p>{x.name}</p>
       </div>
     </li>
   );
