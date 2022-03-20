@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledNav } from './Servers.style';
-function Servers({ toggleTheme, servers, changeServer }) {
+function Servers({ toggleTheme, servers }) {
   return (
     <StyledNav>
       <ul>
@@ -8,8 +8,8 @@ function Servers({ toggleTheme, servers, changeServer }) {
           <button onClick={toggleTheme}>Mode</button>
         </li>
         {servers.map((server) => (
-          <li key={server.id} onClick={(e) => changeServer(e, server.id)}>
-            {server.name}
+          <li key={server.id}>
+            <button>{server.name}</button>
           </li>
         ))}
       </ul>

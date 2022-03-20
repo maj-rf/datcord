@@ -13,29 +13,18 @@ const Wrapper = styled.div`
 `;
 export default function Home({ toggleTheme }) {
   const [servers, setServers] = useState([]);
-  const [currentServer, setCurrentServer] = useState({});
   useEffect(() => {
     const unsub = onSnapshot(collection(db, 'servers'), (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setServers(data);
-      setCurrentServer(data[0]);
     });
     return unsub;
   }, []);
 
-  async function changeServer(e, id) {
-    const newServer = [...servers].filter((server) => server.id === id);
-    setCurrentServer(newServer);
-  }
-
   return (
     <Wrapper>
-      <Servers
-        toggleTheme={toggleTheme}
-        servers={servers}
-        changeServer={changeServer}
-      ></Servers>
-      <Channels currentServer={currentServer} />
+      <Servers toggleTheme={toggleTheme} servers={servers}></Servers>
+      <Channels servers={servers} />
       <ChatPanel />
       <UserPanel />
     </Wrapper>

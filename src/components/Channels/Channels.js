@@ -4,7 +4,7 @@ import { useUserAuth } from '../../context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { updateDoc, doc, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../firebase-config';
-function Channels({ currentServer }) {
+function Channels({ servers }) {
   const { logOut, user } = useUserAuth();
   const [currentUsers, setCurrentUsers] = useState([]);
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function Channels({ currentServer }) {
     <ChannelSection>
       <div>
         <div className="channel-head">
-          <h3>{currentServer.name}</h3>
+          <h3>{servers[0]?.name}</h3>
         </div>
 
         <ul>
