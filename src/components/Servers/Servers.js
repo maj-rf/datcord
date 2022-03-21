@@ -1,24 +1,17 @@
 import React from 'react';
 import { StyledNav } from './Servers.style';
-function Servers(props) {
+function Servers({ toggleTheme, servers }) {
   return (
     <StyledNav>
       <ul>
         <li>
-          <button onClick={props.toggleTheme}>Mode</button>
+          <button onClick={toggleTheme}>Mode</button>
         </li>
-        <li>
-          <button>Click</button>
-        </li>
-        <li>
-          <button>Click</button>
-        </li>
-        <li>
-          <button>Click</button>
-        </li>
-        <li>
-          <button>Click</button>
-        </li>
+        {servers.map((server) => (
+          <li key={server.id}>
+            <button>{server.name}</button>
+          </li>
+        ))}
       </ul>
     </StyledNav>
   );
