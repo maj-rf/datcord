@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ChannelSection } from './Channels.style';
 import { useUserAuth } from '../../context/UserAuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { updateDoc, doc, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import { data } from '../../data';
 function Channels({ servers }) {
   const { logOut, user } = useUserAuth();
   const [currentUsers, setCurrentUsers] = useState([]);
@@ -36,21 +37,16 @@ function Channels({ servers }) {
 
         <ul>
           <span>v Text Channel</span>
-          <li>
-            <span>#</span> general
-          </li>
-          <li>
-            <span>#</span> spam-city
-          </li>
-          <li>
-            <span>#</span> off-topic
-          </li>
-          <li>
-            <span>#</span> channel
-          </li>
+          {data.map((channel) => (
+            <li key={channel.id}>
+              <NavLink to={`/home/${channel.id}`}>
+                <span>#</span> {channel.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
-        <ul>
+        {/* <ul>
           <span>v Gaming</span>
           <li>
             <span>#</span> Switch
@@ -64,7 +60,7 @@ function Channels({ servers }) {
           <li>
             <span>#</span> PC
           </li>
-        </ul>
+        </ul> */}
       </div>
       <div className="user-div">
         <p>{[...currentUsers].filter((x) => x.uid === user.uid)[0]?.name}</p>

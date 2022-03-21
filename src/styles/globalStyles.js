@@ -46,7 +46,8 @@ li {
 
 a {
   text-decoration: none;
-  color: tomato;
+
+  color: ${({ theme }) => theme.text};
 }`;
 
 export const lightTheme = {

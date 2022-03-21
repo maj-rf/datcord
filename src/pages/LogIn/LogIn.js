@@ -68,7 +68,10 @@ export default function LogIn() {
         </div>
         <div>
           <p>
-            Don't have an account?<Link to="/signup">Sign Up</Link>
+            Don't have an account?
+            <Link to="/signup">
+              <button type="button">Sign Up</button>
+            </Link>
           </p>
         </div>
         {error && <p>{error}</p>}

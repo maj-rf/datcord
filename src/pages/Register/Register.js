@@ -70,7 +70,10 @@ export default function Register() {
         </div>
         <div>
           <p>
-            Already have an account?<Link to="/">Log In</Link>
+            Already have an account?
+            <Link to="/">
+              <button type="button">Log In</button>
+            </Link>
           </p>
         </div>
         {error && <p>{error}</p>}
