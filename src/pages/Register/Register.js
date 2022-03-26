@@ -3,6 +3,12 @@ import { useState } from 'react';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { setDoc, doc, Timestamp } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import {
+  StyledSection,
+  StyledButton,
+  StyledForm,
+} from '../../styles/sharedStyles';
+
 export default function Register() {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(false);
@@ -38,8 +44,8 @@ export default function Register() {
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
+    <StyledSection>
+      <StyledForm onSubmit={handleSubmit}>
         <h1>Create an Account</h1>
         <div>
           <input
@@ -49,35 +55,38 @@ export default function Register() {
             name="email"
           />
         </div>
-        <div>
+        <div className="pass-container">
           <input
             type={visibility ? 'text' : 'password'}
             onChange={handleChange}
             placeholder="Password"
             name="password"
           />
-          <button
+          <StyledButton
             type="button"
             onClick={() => setVisibility((prevState) => !prevState)}
+            className="show-btn"
           >
             Show
-          </button>
+          </StyledButton>
         </div>
         <div>
-          <button disabled={loading}>
+          <StyledButton submit disabled={loading}>
             {loading ? 'Loading..' : 'Register'}
-          </button>
+          </StyledButton>
         </div>
         <div>
           <p>
-            Already have an account?
+            Already have an account?{' '}
             <Link to="/">
-              <button type="button">Log In</button>
+              <button type="button" className="redirect-btn">
+                Log In
+              </button>
             </Link>
           </p>
         </div>
         {error && <p>{error}</p>}
-      </form>
-    </section>
+      </StyledForm>
+    </StyledSection>
   );
 }

@@ -3,6 +3,16 @@ import { useState } from 'react';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import styled from 'styled-components';
+import {
+  StyledSection,
+  StyledButton,
+  StyledForm,
+} from '../../styles/sharedStyles';
+
+const WelcomeDiv = styled.div`
+  text-align: center;
+`;
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -36,46 +46,62 @@ export default function LogIn() {
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <h1>Log In</h1>
+    <StyledSection>
+      <WelcomeDiv>
+        <h1>Welcome to Datcord!</h1>
+        <p>It features most of the core functionalities of Discord.</p>
+        <ul>
+          <li> - Be a member of a server</li>
+          <li> - Create channels in a server</li>
+          <li> - Send messages to chat</li>
+          <li> - See who is online/offline</li>
+        </ul>
+      </WelcomeDiv>
+
+      <StyledForm onSubmit={handleSubmit}>
+        <div>
+          <h2>Log In</h2>
+        </div>
         <div>
           <input
-            type="email"
+            type="Email"
             onChange={handleChange}
             placeholder="Email"
             name="email"
           />
         </div>
-        <div>
+        <div className="pass-container">
           <input
             type={visibility ? 'text' : 'password'}
             onChange={handleChange}
             placeholder="Password"
             name="password"
           />
-          <button
+          <StyledButton
             type="button"
             onClick={() => setVisibility((prevState) => !prevState)}
+            className="show-btn"
           >
             Show
-          </button>
+          </StyledButton>
         </div>
         <div>
-          <button type="submit" disabled={loading}>
+          <StyledButton submit type="submit" disabled={loading}>
             {loading ? 'Loading..' : 'Log In'}
-          </button>
+          </StyledButton>
         </div>
         <div>
           <p>
-            Don't have an account?
+            Don't have an account?{' '}
             <Link to="/signup">
-              <button type="button">Sign Up</button>
+              <button type="button" className="redirect-btn">
+                Sign Up
+              </button>
             </Link>
           </p>
         </div>
         {error && <p>{error}</p>}
-      </form>
-    </section>
+      </StyledForm>
+    </StyledSection>
   );
 }
