@@ -1,13 +1,14 @@
 {
   "files": {
     "main.css": "/datcord/static/css/main.cca2e1d6.css",
-    "main.js": "/datcord/static/js/main.e5ddb0b9.js",
+    "main.js": "/datcord/static/js/main.99bf804f.js",
+    "static/media/mainbg.jpeg": "/datcord/static/media/mainbg.9e9d2692fac436ea4325.jpeg",
     "index.html": "/datcord/index.html",
     "main.cca2e1d6.css.map": "/datcord/static/css/main.cca2e1d6.css.map",
-    "main.e5ddb0b9.js.map": "/datcord/static/js/main.e5ddb0b9.js.map"
+    "main.99bf804f.js.map": "/datcord/static/js/main.99bf804f.js.map"
   },
   "entrypoints": [
     "static/css/main.cca2e1d6.css",
-    "static/js/main.e5ddb0b9.js"
+    "static/js/main.99bf804f.js"
   ]
 }
