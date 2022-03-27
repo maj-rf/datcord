@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { ChannelSection } from './Channels.style';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { updateDoc, doc, onSnapshot, collection } from 'firebase/firestore';
+import { updateDoc, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { data } from '../../data';
 function Channels({ servers }) {
   const { logOut, user } = useUserAuth();
-  const [currentUsers, setCurrentUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
   const navigate = useNavigate();
   const handleLogOut = async () => {
     try {
       await logOut();
-      await updateDoc(doc(db, 'users', user.uid), {
+      await updateDoc(doc(db, 'users', `${user.uid}`), {
         isOnline: false,
       });
       navigate('/');
@@ -22,11 +22,11 @@ function Channels({ servers }) {
   };
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
-      setCurrentUsers(snapshot.docs.map((doc) => doc.data()));
+    const unsub = onSnapshot(doc(db, `users/${user.uid}`), (snapshot) => {
+      setCurrentUser(snapshot.data());
     });
-    return unsub;
-  }, []);
+    return () => unsub();
+  }, [user]);
 
   return (
     <ChannelSection>
@@ -63,7 +63,7 @@ function Channels({ servers }) {
         </ul> */}
       </div>
       <div className="user-div">
-        <p>{[...currentUsers].filter((x) => x.uid === user.uid)[0]?.name}</p>
+        <p>{currentUser.name}</p>
         {/* ^ checks if user.email exists and show if true */}
         <button onClick={handleLogOut}>Logout</button>
       </div>

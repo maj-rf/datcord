@@ -10,5 +10,7 @@ export default function ProtectedRoute({ children }) {
   let { user } = useUserAuth();
   if (!user) {
     return <Navigate to="/" />;
-  } else return children;
+  }
+
+  return children;
 }
