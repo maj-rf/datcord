@@ -8,10 +8,20 @@ import {
   StyledSection,
   StyledButton,
   StyledForm,
+  StyledDiv,
 } from '../../styles/sharedStyles';
 
 const WelcomeDiv = styled.div`
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  a {
+    color: #5765f2;
+  }
 `;
 
 export default function LogIn() {
@@ -47,61 +57,69 @@ export default function LogIn() {
 
   return (
     <StyledSection>
-      <WelcomeDiv>
-        <h1>Welcome to Datcord!</h1>
-        <p>It features most of the core functionalities of Discord.</p>
-        <ul>
-          <li> - Be a member of a server</li>
-          <li> - Create channels in a server</li>
-          <li> - Send messages to chat</li>
-          <li> - See who is online/offline</li>
-        </ul>
-      </WelcomeDiv>
+      <StyledDiv>
+        <WelcomeDiv>
+          <h1>Datcord</h1>
+          <p>A Discord Clone</p>
+          <ul>
+            Core Features:
+            <li> - Become a member of a server</li>
+            <li> - Create channels in a server</li>
+            <li> - Send messages to chat</li>
+            <li> - See who is online/offline</li>
+          </ul>
+          <div>
+            <a href="https://github.com/bananabread08/datcord">
+              Check Repository
+            </a>
+          </div>
+        </WelcomeDiv>
 
-      <StyledForm onSubmit={handleSubmit}>
-        <div>
-          <h2>Log In</h2>
-        </div>
-        <div>
-          <input
-            type="Email"
-            onChange={handleChange}
-            placeholder="Email"
-            name="email"
-          />
-        </div>
-        <div className="pass-container">
-          <input
-            type={visibility ? 'text' : 'password'}
-            onChange={handleChange}
-            placeholder="Password"
-            name="password"
-          />
-          <StyledButton
-            type="button"
-            onClick={() => setVisibility((prevState) => !prevState)}
-            className="show-btn"
-          >
-            Show
-          </StyledButton>
-        </div>
-        <div>
-          <StyledButton submit type="submit" disabled={loading}>
-            {loading ? 'Loading..' : 'Log In'}
-          </StyledButton>
-        </div>
-        <div>
-          <p>
-            Don't have an account?{' '}
-            <Link to="/signup">
-              <button type="button" className="redirect-btn">
-                Sign Up
-              </button>
-            </Link>
-          </p>
-        </div>
-        {error && <p>{error}</p>}
-      </StyledForm>
+        <StyledForm onSubmit={handleSubmit}>
+          <div>
+            <h2>Welcome Back!</h2>
+          </div>
+          <div>
+            <input
+              type="Email"
+              onChange={handleChange}
+              placeholder="Email"
+              name="email"
+            />
+          </div>
+          <div className="pass-container">
+            <input
+              type={visibility ? 'text' : 'password'}
+              onChange={handleChange}
+              placeholder="Password"
+              name="password"
+            />
+            <StyledButton
+              type="button"
+              onClick={() => setVisibility((prevState) => !prevState)}
+              className="show-btn"
+            >
+              Show
+            </StyledButton>
+          </div>
+          <div>
+            <StyledButton submit type="submit" disabled={loading}>
+              {loading ? 'Loading..' : 'Log In'}
+            </StyledButton>
+          </div>
+          <div>
+            <p>
+              Need an account?{' '}
+              <Link to="/signup">
+                <button type="button" className="redirect-btn">
+                  Register
+                </button>
+              </Link>
+            </p>
+          </div>
+          {error && <p>{error}</p>}
+        </StyledForm>
+      </StyledDiv>
     </StyledSection>
   );
 }

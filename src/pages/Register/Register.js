@@ -7,6 +7,7 @@ import {
   StyledSection,
   StyledButton,
   StyledForm,
+  StyledDiv,
 } from '../../styles/sharedStyles';
 
 export default function Register() {
@@ -45,48 +46,50 @@ export default function Register() {
 
   return (
     <StyledSection>
-      <StyledForm onSubmit={handleSubmit}>
-        <h1>Create an Account</h1>
-        <div>
-          <input
-            type="email"
-            onChange={handleChange}
-            placeholder="Email"
-            name="email"
-          />
-        </div>
-        <div className="pass-container">
-          <input
-            type={visibility ? 'text' : 'password'}
-            onChange={handleChange}
-            placeholder="Password"
-            name="password"
-          />
-          <StyledButton
-            type="button"
-            onClick={() => setVisibility((prevState) => !prevState)}
-            className="show-btn"
-          >
-            Show
-          </StyledButton>
-        </div>
-        <div>
-          <StyledButton submit disabled={loading}>
-            {loading ? 'Loading..' : 'Register'}
-          </StyledButton>
-        </div>
-        <div>
-          <p>
-            Already have an account?{' '}
-            <Link to="/">
-              <button type="button" className="redirect-btn">
-                Log In
-              </button>
-            </Link>
-          </p>
-        </div>
-        {error && <p>{error}</p>}
-      </StyledForm>
+      <StyledDiv>
+        <StyledForm onSubmit={handleSubmit}>
+          <h1>Create an Account</h1>
+          <div>
+            <input
+              type="email"
+              onChange={handleChange}
+              placeholder="Email"
+              name="email"
+            />
+          </div>
+          <div className="pass-container">
+            <input
+              type={visibility ? 'text' : 'password'}
+              onChange={handleChange}
+              placeholder="Password"
+              name="password"
+            />
+            <StyledButton
+              type="button"
+              onClick={() => setVisibility((prevState) => !prevState)}
+              className="show-btn"
+            >
+              Show
+            </StyledButton>
+          </div>
+          <div>
+            <StyledButton submit disabled={loading}>
+              {loading ? 'Loading..' : 'Register'}
+            </StyledButton>
+          </div>
+          <div>
+            <p>
+              Already have an account?{' '}
+              <Link to="/">
+                <button type="button" className="redirect-btn">
+                  Log In
+                </button>
+              </Link>
+            </p>
+          </div>
+          {error && <p>{error}</p>}
+        </StyledForm>
+      </StyledDiv>
     </StyledSection>
   );
 }
