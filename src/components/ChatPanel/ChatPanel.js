@@ -1,25 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChatSection } from './ChatPanel.style';
-import { useParams } from 'react-router-dom';
-import { getChannelMessages } from '../../data';
-export default function ChatPanel() {
-  let { channelId = '10001' } = useParams();
-  let channelData = getChannelMessages(channelId);
+import { useOutletContext, useParams } from 'react-router-dom';
+import {
+  onSnapshot,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
+import { db } from '../../firebase-config';
+
+export default function ChatPanel({ serverChannels }) {
+  let { channelId = 'Rmg6sdx6RiQViG29nWpv' } = useParams();
+  const [channelMsgs, setChannelMsgs] = useState([]);
+  const currentChannel = [...serverChannels].filter((x) => x.id === channelId);
+  const [message, setMessage] = useState('');
+  const [currentUser] = useOutletContext(); //context hook from Outlet
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(
+        db,
+        `servers/1kU49xyjRsrEE6KlUXub/channels/${channelId}`,
+        'messages'
+      ),
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setChannelMsgs(data);
+      }
+    );
+    return () => unsub();
+  }, [channelId]);
+
+  function handleChange(e) {
+    setMessage(e.target.value);
+  }
+
+  async function sendMessage(e) {
+    e.preventDefault();
+    try {
+      await addDoc(
+        collection(
+          db,
+          `servers/1kU49xyjRsrEE6KlUXub/channels/${channelId}`,
+          'messages'
+        ),
+        {
+          ownerName: currentUser.name,
+          ownerId: currentUser.uid,
+          content: message,
+          createdAt: serverTimestamp(),
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <ChatSection>
       <div className="channel-name">
-        <h3># {channelData.name}</h3>
+        <h3># {currentChannel[0]?.name}</h3>
       </div>
 
       <ul>
-        <h1>Welcome to #{channelData.name}</h1>
-        {channelData.messages.map((msg) => {
+        <h1>Welcome to #{currentChannel[0]?.name}</h1>
+        {channelMsgs.map((msg) => {
           return (
-            <li key={msg.id}>
+            <li key={msg.ownerId}>
               <div>image</div>
               <div>
-                <h3>{msg.owner.name}</h3>
+                <h3>{msg.ownerName}</h3>
                 <p>{msg.content}</p>
               </div>
             </li>
@@ -27,7 +79,14 @@ export default function ChatPanel() {
         })}
       </ul>
       <div className="msg-container">
-        <input type="text" placeholder="Message..." />
+        <form onSubmit={sendMessage}>
+          <input
+            type="text"
+            placeholder="Message..."
+            onChange={handleChange}
+            value={message}
+          />
+        </form>
       </div>
     </ChatSection>
   );
