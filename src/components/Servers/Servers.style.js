@@ -26,6 +26,10 @@ const StyledNav = styled.nav`
       color: ${(props) => props.theme.hovertxt};
     }
   }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export { StyledNav };

@@ -23,4 +23,8 @@ export const UserPanelSection = styled.section`
   .offline {
     background-color: #eb4034;
   }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
