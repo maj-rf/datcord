@@ -12,10 +12,12 @@ import { db } from '../../firebase-config';
 export default function ChatPanel({ serverChannels }) {
   let { channelId = 'Rmg6sdx6RiQViG29nWpv' } = useParams();
   const [channelMsgs, setChannelMsgs] = useState([]);
+  const [loading, setLoading] = useState(false);
   const currentChannel = [...serverChannels].filter((x) => x.id === channelId);
   const [message, setMessage] = useState('');
   const [currentUser] = useOutletContext(); //context hook from Outlet
   useEffect(() => {
+    setLoading(true);
     const unsub = onSnapshot(
       collection(
         db,
@@ -28,6 +30,7 @@ export default function ChatPanel({ serverChannels }) {
           id: doc.id,
         }));
         setChannelMsgs(data);
+        setLoading(false);
       }
     );
     return () => unsub();
@@ -63,20 +66,25 @@ export default function ChatPanel({ serverChannels }) {
       <div className="channel-name">
         <h3># {currentChannel[0]?.name}</h3>
       </div>
-
       <ul>
-        <h1>Welcome to #{currentChannel[0]?.name}</h1>
-        {channelMsgs.map((msg) => {
-          return (
-            <li key={msg.ownerId}>
-              <div>image</div>
-              <div>
-                <h3>{msg.ownerName}</h3>
-                <p>{msg.content}</p>
-              </div>
-            </li>
-          );
-        })}
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <h1>Welcome to #{currentChannel[0]?.name}</h1>
+            {channelMsgs.map((msg) => {
+              return (
+                <li key={msg.ownerId + msg.createdAt}>
+                  <div>image</div>
+                  <div>
+                    <h3>{msg.ownerName}</h3>
+                    <p>{msg.content}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </>
+        )}
       </ul>
       <div className="msg-container">
         <form onSubmit={sendMessage}>
