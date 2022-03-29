@@ -12,18 +12,20 @@ export const ChatSection = styled.section`
     border-bottom: 1px solid ${(props) => props.theme.secondary};
   }
   ul {
+    flex-basis: 100%;
     overflow-y: auto;
     padding: 1rem;
     li {
       display: flex;
       gap: 1rem;
-      padding-top: 0.5rem;
+      margin-top: 0.9rem;
     }
   }
   .msg-container {
     padding: 0.5rem 1rem;
   }
   input {
+    padding: 0.5rem;
     font-size: 1.2rem;
     min-width: 100%;
     height: 50px;
