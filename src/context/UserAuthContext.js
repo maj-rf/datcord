@@ -25,6 +25,7 @@ export function UserAuthContextProvider({ children }) {
   }
 
   function logOut() {
+    setUser(null);
     return signOut(auth);
   }
 
