@@ -6,8 +6,11 @@ import {
   collection,
   addDoc,
   serverTimestamp,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import profileImage from '../../assets/pp-svg.svg';
 
 export default function ChatPanel({ serverChannels }) {
   let { channelId = 'Rmg6sdx6RiQViG29nWpv' } = useParams();
@@ -18,21 +21,20 @@ export default function ChatPanel({ serverChannels }) {
   const [currentUser] = useOutletContext(); //context hook from Outlet
   useEffect(() => {
     setLoading(true);
-    const unsub = onSnapshot(
-      collection(
-        db,
-        `servers/1kU49xyjRsrEE6KlUXub/channels/${channelId}`,
-        'messages'
-      ),
-      (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setChannelMsgs(data);
-        setLoading(false);
-      }
+    const messageRef = collection(
+      db,
+      `servers/1kU49xyjRsrEE6KlUXub/channels/${channelId}`,
+      'messages'
     );
+    const q = query(messageRef, orderBy('createdAt', 'asc'));
+    const unsub = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setChannelMsgs(data);
+      setLoading(false);
+    });
     return () => unsub();
   }, [channelId]);
 
@@ -68,14 +70,25 @@ export default function ChatPanel({ serverChannels }) {
       </div>
       <ul>
         {loading ? (
-          <div>Loading...</div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%',
+            }}
+          >
+            Loading...
+          </div>
         ) : (
           <>
             <h1>Welcome to #{currentChannel[0]?.name}</h1>
             {channelMsgs.map((msg) => {
               return (
                 <li key={msg.ownerId + msg.createdAt}>
-                  <div>image</div>
+                  <div className="img-container">
+                    <img src={profileImage} alt={msg.ownerName + 'image'} />
+                  </div>
                   <div>
                     <h3>{msg.ownerName}</h3>
                     <p>{msg.content}</p>

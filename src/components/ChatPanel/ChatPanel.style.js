@@ -14,11 +14,29 @@ export const ChatSection = styled.section`
   ul {
     flex-basis: 100%;
     overflow-y: auto;
-    padding: 1rem;
+
+    h1 {
+      padding: 0.5rem 0.5rem;
+    }
+
     li {
       display: flex;
       gap: 1rem;
-      margin-top: 0.9rem;
+      margin-top: 0.5rem;
+      padding: 0 0.5rem;
+
+      &:hover {
+        background-color: ${(props) => props.theme.hoverbg};
+      }
+    }
+  }
+  .img-container {
+    background-color: dimgray;
+    border-radius: 50%;
+
+    img {
+      height: 40px;
+      width: 40px;
     }
   }
   .msg-container {
