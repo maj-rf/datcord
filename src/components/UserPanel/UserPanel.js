@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserPanelSection } from './UserPanel.style';
-import User from './User';
+import User from '../User/User';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 function UserPanel() {
@@ -16,18 +16,18 @@ function UserPanel() {
   const offline = [...currentUsers].filter((user) => user.isOnline === false);
   return (
     <UserPanelSection>
-      <ul>
+      <div>
         <h3>Online</h3>
         {online.map((x) => (
           <User key={x.uid} x={x}></User>
         ))}
-      </ul>
-      <ul>
+      </div>
+      <div>
         <h3>Offline</h3>
         {offline.map((x) => (
           <User key={x.uid} x={x}></User>
         ))}
-      </ul>
+      </div>
     </UserPanelSection>
   );
 }
