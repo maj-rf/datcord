@@ -33,10 +33,11 @@ export const ChatSection = styled.section`
   .img-container {
     background-color: dimgray;
     border-radius: 50%;
+    max-height: 40px;
+    max-width: 40px;
 
     img {
       height: 40px;
-      width: 40px;
     }
   }
   .msg-container {

@@ -13,12 +13,18 @@ const UserWrapper = styled.div`
   .offline {
     background-color: #eb4034;
   }
+
+  &:hover {
+    background-color: ${(props) => props.theme.hoverbg};
+  }
 `;
 
 const ImgContainer = styled.div`
   position: relative;
   background-color: dimgray;
   border-radius: 50%;
+  max-width: 40px;
+  max-height: 40px;
 
   img {
     height: auto;
