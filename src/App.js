@@ -63,12 +63,10 @@ function App() {
               <Route
                 index
                 element={<ChatPanel serverChannels={serverChannels} />}
-                //element={<ChatPanel />}
               />
               <Route
                 path=":channelId"
                 element={<ChatPanel serverChannels={serverChannels} />}
-                //element={<ChatPanel />}
               />
             </Route>
           </Routes>

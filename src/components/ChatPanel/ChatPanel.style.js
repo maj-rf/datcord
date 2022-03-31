@@ -52,5 +52,8 @@ export const ChatSection = styled.section`
     border: none;
     outline: none;
     border-radius: 7px;
+    &:disabled {
+      filter: brightness(0.7);
+    }
   }
 `;

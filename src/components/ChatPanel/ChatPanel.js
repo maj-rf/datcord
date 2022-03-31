@@ -13,7 +13,7 @@ import { db } from '../../firebase-config';
 import profileImage from '../../assets/pp-svg.svg';
 
 export default function ChatPanel({ serverChannels }) {
-  let { channelId = 'Rmg6sdx6RiQViG29nWpv' } = useParams();
+  let { channelId = 'NyrtCoRvt0WIHPJMHwyv' } = useParams();
   const [channelMsgs, setChannelMsgs] = useState([]);
   const [loading, setLoading] = useState(false);
   const currentChannel = [...serverChannels].filter((x) => x.id === channelId);
@@ -66,7 +66,7 @@ export default function ChatPanel({ serverChannels }) {
   return (
     <ChatSection>
       <div className="channel-name">
-        <h3># {currentChannel[0]?.name}</h3>
+        <h3>#{currentChannel[0]?.name}</h3>
       </div>
       <ul>
         {loading ? (
@@ -82,7 +82,11 @@ export default function ChatPanel({ serverChannels }) {
           </div>
         ) : (
           <>
-            <h1>Welcome to #{currentChannel[0]?.name}</h1>
+            <h1>
+              {currentChannel[0]?.id === 'NyrtCoRvt0WIHPJMHwyv'
+                ? "Welcome to Datcord's Test Server!"
+                : `Welcome to #${currentChannel[0]?.name}`}
+            </h1>
             {channelMsgs.map((msg) => {
               return (
                 <li key={msg.ownerId + msg.createdAt}>
@@ -105,7 +109,12 @@ export default function ChatPanel({ serverChannels }) {
             type="text"
             placeholder="Message..."
             onChange={handleChange}
-            value={message}
+            value={
+              currentChannel[0]?.id === 'NyrtCoRvt0WIHPJMHwyv'
+                ? 'You do not have permission to send messages here.'
+                : message
+            }
+            disabled={currentChannel[0]?.id === 'NyrtCoRvt0WIHPJMHwyv'}
           />
         </form>
       </div>
