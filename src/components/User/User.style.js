@@ -5,6 +5,7 @@ const UserWrapper = styled.div`
   align-items: center;
   gap: 0.5rem;
   min-height: 50px;
+  width: 100%;
   .online {
     background-color: #34eb52;
   }

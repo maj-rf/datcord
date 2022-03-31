@@ -39,6 +39,7 @@ export const ChannelSection = styled.section`
   .user-div {
     padding: 0.5rem 1rem;
     border-top: 1px solid ${(props) => props.theme.secondary};
+    display: flex;
   }
 
   /* @media screen and (max-width: 768px) {

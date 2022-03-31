@@ -1,27 +1,8 @@
 import React from 'react';
 import { ChannelSection } from './Channels.style';
-import { useUserAuth } from '../../context/UserAuthContext';
-import { useNavigate, NavLink } from 'react-router-dom';
-import { updateDoc, doc } from 'firebase/firestore';
-import { db } from '../../firebase-config';
-
-function Channels({ servers, serverChannels, currentUser }) {
-  const { logOut, user } = useUserAuth();
-
-  const navigate = useNavigate();
-
-  const handleLogOut = async () => {
-    try {
-      await logOut();
-      await updateDoc(doc(db, 'users', `${user.uid}`), {
-        isOnline: false,
-      });
-      navigate('/');
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+import { NavLink } from 'react-router-dom';
+import User from '../User/User';
+function Channels({ servers, serverChannels, currentUser, handleProfileView }) {
   return (
     <ChannelSection>
       <div>
@@ -41,9 +22,9 @@ function Channels({ servers, serverChannels, currentUser }) {
         </ul>
       </div>
       <div className="user-div">
-        <p>{currentUser.name}</p>
-        {/* ^ checks if user.name exists and show if true */}
-        <button onClick={handleLogOut}>Logout</button>
+        <User x={currentUser} />
+        <button onClick={handleProfileView}>Set</button>
+        {/* <button onClick={handleLogOut}>Logout</button> */}
       </div>
     </ChannelSection>
   );
