@@ -15,7 +15,8 @@ const UserWrapper = styled.div`
   }
 
   &:hover {
-    background-color: ${(props) => props.theme.hoverbg};
+    background-color: ${(props) =>
+      props.primary ? undefined : props.theme.hoverbg};
   }
 `;
 

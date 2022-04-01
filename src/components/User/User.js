@@ -1,9 +1,9 @@
 import React from 'react';
 import profileImage from '../../assets/pp-svg.svg';
 import { UserWrapper, ImgContainer } from './User.style';
-function User({ x }) {
+function User({ x, primary }) {
   return (
-    <UserWrapper>
+    <UserWrapper primary={primary}>
       <ImgContainer>
         <img src={profileImage} alt={x.name + ' image'} />
         <div className="status-container">
