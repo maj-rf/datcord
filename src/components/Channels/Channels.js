@@ -1,17 +1,27 @@
 import React from 'react';
-import { ChannelSection } from './Channels.style';
+import {
+  ChannelSection,
+  ChannelHead,
+  ChannelList,
+  ChannelUpper,
+  ChannelLower,
+  ChannelBtn,
+} from './Channels.style';
 import { NavLink } from 'react-router-dom';
 import User from '../User/User';
 function Channels({ servers, serverChannels, currentUser, handleProfileView }) {
   return (
     <ChannelSection>
-      <div>
-        <div className="channel-head">
+      <ChannelUpper>
+        <ChannelHead>
           <h3>{servers[0]?.name}</h3>
-        </div>
+        </ChannelHead>
 
-        <ul>
-          <span>v Text Channel</span>
+        <ChannelList>
+          <div>
+            <span>v Text Channel</span>
+            <ChannelBtn>+</ChannelBtn>
+          </div>
           {serverChannels?.map((channel) => (
             <li key={channel.id}>
               <NavLink to={`/home/${channel.id}`}>
@@ -19,13 +29,13 @@ function Channels({ servers, serverChannels, currentUser, handleProfileView }) {
               </NavLink>
             </li>
           ))}
-        </ul>
-      </div>
-      <div className="user-div">
-        <User x={currentUser} />
-        <button onClick={handleProfileView}>Set</button>
+        </ChannelList>
+      </ChannelUpper>
+      <ChannelLower>
+        <User x={currentUser} primary={true} />
+        <ChannelBtn onClick={handleProfileView}>Set</ChannelBtn>
         {/* <button onClick={handleLogOut}>Logout</button> */}
-      </div>
+      </ChannelLower>
     </ChannelSection>
   );
 }
