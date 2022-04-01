@@ -44,6 +44,7 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
         <Profile
           handleProfileView={handleProfileView}
           handleLogOut={handleLogOut}
+          currentUser={currentUser}
         />
       ) : (
         <>
