@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChatSection } from './ChatPanel.style';
 import { useOutletContext, useParams } from 'react-router-dom';
+import User from '../User/User';
 import {
   onSnapshot,
   collection,
@@ -10,7 +11,6 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import { db } from '../../firebase-config';
-import profileImage from '../../assets/pp-svg.svg';
 
 export default function ChatPanel({ serverChannels }) {
   let { channelId = 'NyrtCoRvt0WIHPJMHwyv' } = useParams();
@@ -18,7 +18,8 @@ export default function ChatPanel({ serverChannels }) {
   const [loading, setLoading] = useState(false);
   const currentChannel = [...serverChannels].filter((x) => x.id === channelId);
   const [message, setMessage] = useState('');
-  const [currentUser] = useOutletContext(); //context hook from Outlet
+  const [currentUser, allUsers] = useOutletContext(); //context hook from Outlet
+
   useEffect(() => {
     setLoading(true);
     const messageRef = collection(
@@ -58,6 +59,7 @@ export default function ChatPanel({ serverChannels }) {
           createdAt: serverTimestamp(),
         }
       );
+      setMessage('');
     } catch (err) {
       console.log(err);
     }
@@ -90,13 +92,12 @@ export default function ChatPanel({ serverChannels }) {
             {channelMsgs.map((msg) => {
               return (
                 <li key={msg.ownerId + msg.createdAt}>
-                  <div className="img-container">
-                    <img src={profileImage} alt={msg.ownerName + 'image'} />
-                  </div>
-                  <div>
-                    <h3>{msg.ownerName}</h3>
+                  <User
+                    x={[...allUsers].filter((x) => x.uid === msg.ownerId)[0]}
+                    chat
+                  >
                     <p>{msg.content}</p>
-                  </div>
+                  </User>
                 </li>
               );
             })}
