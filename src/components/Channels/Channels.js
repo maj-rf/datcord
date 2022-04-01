@@ -32,7 +32,7 @@ function Channels({ servers, serverChannels, currentUser, handleProfileView }) {
         </ChannelList>
       </ChannelUpper>
       <ChannelLower>
-        <User x={currentUser} primary={true} />
+        <User x={currentUser} primary />
         <ChannelBtn onClick={handleProfileView}>Set</ChannelBtn>
         {/* <button onClick={handleLogOut}>Logout</button> */}
       </ChannelLower>
