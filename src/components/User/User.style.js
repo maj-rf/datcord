@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const UserWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: ${(props) => (props.chat ? undefined : 'center')};
   gap: 0.5rem;
   min-height: 50px;
   width: 100%;

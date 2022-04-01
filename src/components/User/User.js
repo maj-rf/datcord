@@ -1,16 +1,21 @@
 import React from 'react';
 import profileImage from '../../assets/pp-svg.svg';
 import { UserWrapper, ImgContainer } from './User.style';
-function User({ x, primary }) {
+function User({ x, primary, chat, children }) {
   return (
-    <UserWrapper primary={primary}>
+    <UserWrapper primary={primary} chat={chat}>
       <ImgContainer>
-        <img src={profileImage} alt={x.name + ' image'} />
-        <div className="status-container">
-          <div className={x.isOnline ? 'online ' : 'offline '}></div>
-        </div>
+        <img src={profileImage} alt={x?.name + ' image'} />
+        {!chat && (
+          <div className="status-container">
+            <div className={x?.isOnline ? 'online ' : 'offline '}></div>
+          </div>
+        )}
       </ImgContainer>
-      <p>{x.name}</p>
+      <div>
+        <p>{x?.name}</p>
+        {children}
+      </div>
     </UserWrapper>
   );
 }
