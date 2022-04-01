@@ -5,7 +5,7 @@ import UserPanel from '../../components/UserPanel/UserPanel';
 import Profile from '../../components/Profile/Profile';
 import styled from 'styled-components';
 import { useUserAuth } from '../../context/UserAuthContext';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { doc, collection, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { Outlet, useNavigate } from 'react-router-dom';
 const Wrapper = styled.div`
@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 `;
 export default function Home({ toggleTheme, servers, serverChannels }) {
   const [currentUser, setCurrentUser] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
   const { user, logOut } = useUserAuth();
   const navigate = useNavigate();
@@ -24,6 +25,13 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
     });
     return () => unsub();
   }, [user]);
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
+      setAllUsers(snapshot.docs.map((doc) => doc.data()));
+    });
+    return unsub;
+  }, []);
 
   const handleProfileView = () => setShowProfile((prevState) => !prevState);
 
@@ -55,8 +63,8 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
             currentUser={currentUser}
             handleProfileView={handleProfileView}
           />
-          <Outlet context={[currentUser, setCurrentUser]} />
-          <UserPanel />
+          <Outlet context={[currentUser, allUsers]} />
+          <UserPanel allUsers={allUsers} />
         </>
       )}
     </Wrapper>
