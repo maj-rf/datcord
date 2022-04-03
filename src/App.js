@@ -9,7 +9,7 @@ import ChatPanel from './components/ChatPanel/ChatPanel';
 import { Routes, Route } from 'react-router-dom';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import React, { useEffect, useState } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from './firebase-config';
 
 function App() {
@@ -27,16 +27,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const unsub = onSnapshot(
-      collection(db, 'servers/1kU49xyjRsrEE6KlUXub', 'channels'),
-      (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setServerChannels(data);
-      }
+    const channelRef = collection(
+      db,
+      'servers/1kU49xyjRsrEE6KlUXub',
+      'channels'
     );
+    const q = query(channelRef, orderBy('createdAt', 'asc'));
+    const unsub = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setServerChannels(data);
+    });
     return () => unsub();
   }, []);
 
