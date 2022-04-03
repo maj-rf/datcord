@@ -14,6 +14,7 @@ export const ChatSection = styled.section`
   ul {
     flex-basis: 100%;
     overflow-y: auto;
+    line-height: 1.6;
 
     h1 {
       padding: 0.5rem 0.5rem;
@@ -23,7 +24,7 @@ export const ChatSection = styled.section`
       display: flex;
       gap: 1rem;
       margin-top: 0.5rem;
-      padding: 0 0.5rem;
+      padding: 0 1rem;
 
       &:hover {
         background-color: ${(props) => props.theme.hoverbg};
