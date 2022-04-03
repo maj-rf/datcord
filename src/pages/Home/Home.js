@@ -5,7 +5,14 @@ import UserPanel from '../../components/UserPanel/UserPanel';
 import Profile from '../../components/Profile/Profile';
 import styled from 'styled-components';
 import { useUserAuth } from '../../context/UserAuthContext';
-import { doc, collection, onSnapshot, updateDoc } from 'firebase/firestore';
+import {
+  doc,
+  collection,
+  onSnapshot,
+  updateDoc,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { Outlet, useNavigate } from 'react-router-dom';
 const Wrapper = styled.div`
@@ -17,6 +24,8 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
   const [currentUser, setCurrentUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [channelName, setChannelName] = useState('');
   const { user, logOut } = useUserAuth();
   const navigate = useNavigate();
   useEffect(() => {
@@ -46,6 +55,24 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
       console.log(err);
     }
   };
+
+  const handleInputView = () => setShowInput((prevState) => !prevState);
+
+  const handleChange = (e) => setChannelName(e.target.value);
+
+  const addChannel = async (e) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, 'servers/1kU49xyjRsrEE6KlUXub', 'channels'), {
+        name: channelName,
+        createdAt: serverTimestamp(),
+      });
+      setShowInput(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Wrapper>
       {showProfile ? (
@@ -62,6 +89,10 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
             serverChannels={serverChannels}
             currentUser={currentUser}
             handleProfileView={handleProfileView}
+            addChannel={addChannel}
+            handleInputView={handleInputView}
+            showInput={showInput}
+            handleChange={handleChange}
           />
           <Outlet context={[currentUser, allUsers]} />
           <UserPanel allUsers={allUsers} />

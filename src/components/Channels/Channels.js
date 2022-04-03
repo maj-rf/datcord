@@ -9,7 +9,16 @@ import {
 } from './Channels.style';
 import { NavLink } from 'react-router-dom';
 import User from '../User/User';
-function Channels({ servers, serverChannels, currentUser, handleProfileView }) {
+function Channels({
+  servers,
+  serverChannels,
+  currentUser,
+  handleProfileView,
+  addChannel,
+  handleInputView,
+  showInput,
+  handleChange,
+}) {
   return (
     <ChannelSection>
       <ChannelUpper>
@@ -20,8 +29,16 @@ function Channels({ servers, serverChannels, currentUser, handleProfileView }) {
         <ChannelList>
           <div>
             <span>v Text Channel</span>
-            <ChannelBtn>+</ChannelBtn>
+            <ChannelBtn onClick={handleInputView}>
+              {showInput ? 'x' : '+'}
+            </ChannelBtn>
           </div>
+          {showInput && (
+            <form onSubmit={addChannel}>
+              <input onChange={handleChange} placeholder="Name..."></input>
+              <button type="submit">Create</button>
+            </form>
+          )}
           {serverChannels?.map((channel) => (
             <li key={channel.id}>
               <NavLink to={`/home/${channel.id}`}>
