@@ -26,12 +26,12 @@ const ImgContainer = styled.div`
   position: relative;
   background-color: dimgray;
   border-radius: 50%;
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 35px;
+  max-height: 35px;
 
   img {
     height: auto;
-    width: 40px;
+    width: 35px;
   }
   .status-container {
     position: absolute;
