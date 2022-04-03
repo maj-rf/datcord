@@ -53,7 +53,6 @@ export default function ChatPanel({ serverChannels }) {
           'messages'
         ),
         {
-          ownerName: currentUser.name,
           ownerId: currentUser.uid,
           content: message,
           createdAt: serverTimestamp(),

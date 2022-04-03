@@ -17,7 +17,7 @@ export const ChatSection = styled.section`
     line-height: 1.6;
 
     h1 {
-      padding: 0.5rem 0.5rem;
+      padding: 0.5rem 1rem;
     }
 
     li {
