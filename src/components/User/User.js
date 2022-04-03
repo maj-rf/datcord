@@ -1,9 +1,9 @@
 import React from 'react';
 import profileImage from '../../assets/pp-svg.svg';
-import { UserWrapper, ImgContainer } from './User.style';
-function User({ x, primary, chat, children }) {
+import { UserWrapper, ImgContainer, UserInfo } from './User.style';
+function User({ x, primary, chat, offline, children }) {
   return (
-    <UserWrapper primary={primary} chat={chat}>
+    <UserWrapper primary={primary} chat={chat} offline={offline}>
       <ImgContainer>
         <img src={profileImage} alt={x?.name + ' image'} />
         {!chat && (
@@ -12,10 +12,10 @@ function User({ x, primary, chat, children }) {
           </div>
         )}
       </ImgContainer>
-      <div>
+      <UserInfo chat={chat}>
         <p>{x?.name}</p>
         {children}
-      </div>
+      </UserInfo>
     </UserWrapper>
   );
 }

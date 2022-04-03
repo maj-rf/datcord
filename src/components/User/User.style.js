@@ -6,6 +6,7 @@ const UserWrapper = styled.div`
   gap: 0.5rem;
   min-height: 50px;
   width: 100%;
+  filter: opacity(${(props) => (props.offline ? '0.7' : '1')});
   .online {
     background-color: #34eb52;
   }
@@ -17,6 +18,7 @@ const UserWrapper = styled.div`
   &:hover {
     background-color: ${(props) =>
       props.primary ? undefined : props.theme.hoverbg};
+    filter: opacity(1);
   }
 `;
 
@@ -48,4 +50,11 @@ const ImgContainer = styled.div`
   }
 `;
 
-export { UserWrapper, ImgContainer };
+const UserInfo = styled.div`
+  p:first-child {
+    font-weight: ${(props) => (props.chat ? '900' : 'normal')};
+    font-size: ${(props) => (props.chat ? '1.1rem' : 'inherit')};
+  }
+`;
+
+export { UserWrapper, ImgContainer, UserInfo };
