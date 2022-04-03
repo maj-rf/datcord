@@ -8,15 +8,15 @@ function UserPanel({ allUsers }) {
   return (
     <UserPanelSection>
       <div>
-        <h3>Online</h3>
+        <p>ONLINE - {online.length}</p>
         {online.map((x) => (
           <User key={x.uid} x={x}></User>
         ))}
       </div>
       <div>
-        <h3>Offline</h3>
+        <p>OFFLINE - {offline.length}</p>
         {offline.map((x) => (
-          <User key={x.uid} x={x}></User>
+          <User key={x.uid} x={x} offline></User>
         ))}
       </div>
     </UserPanelSection>
