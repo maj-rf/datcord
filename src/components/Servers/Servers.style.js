@@ -1,4 +1,24 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { SunFill } from '@styled-icons/bootstrap/SunFill';
+import { MoonFill } from '@styled-icons/bootstrap/MoonFill';
+
+const moveUp = keyframes`
+    0% {
+      transform: translateY(30px);
+    }
+    100% {
+    transform: translateY(0);
+    }
+`;
+
+const moveDown = keyframes`
+  0% {
+      transform: translateY(-30px);
+    }
+    100% {
+    transform: translateY(0);
+    }
+`;
 
 const StyledNav = styled.nav`
   height: 100vh;
@@ -20,6 +40,7 @@ const StyledNav = styled.nav`
     color: ${(props) => props.theme.text};
     transition: 0.2s ease-in-out;
     cursor: pointer;
+    overflow: auto;
 
     &:hover {
       border-radius: 25%;
@@ -32,4 +53,18 @@ const StyledNav = styled.nav`
   }
 `;
 
-export { StyledNav };
+const LightBtn = styled(SunFill)`
+  color: #f28c38;
+  transition: all 1s ease-in-out;
+  animation-name: ${moveUp};
+  animation-duration: 1.5s;
+`;
+
+const DarkBtn = styled(MoonFill)`
+  color: #9d9b84;
+  transition: all 1s ease-in-out;
+  animation-name: ${moveDown};
+  animation-duration: 1.5s;
+`;
+
+export { StyledNav, LightBtn, DarkBtn };

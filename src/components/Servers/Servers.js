@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyledNav } from './Servers.style';
-function Servers({ toggleTheme, servers }) {
+import { LightBtn, DarkBtn } from './Servers.style';
+function Servers({ theme, toggleTheme, servers }) {
   return (
     <StyledNav>
       <ul>
         <li>
-          <button onClick={toggleTheme}>Mode</button>
+          <button onClick={toggleTheme}>
+            {theme === 'light' ? <DarkBtn size="30" /> : <LightBtn size="30" />}
+          </button>
         </li>
         {servers.map((server) => (
           <li key={server.id}>
