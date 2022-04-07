@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
 `;
-export default function Home({ toggleTheme, servers, serverChannels }) {
+export default function Home({ theme, toggleTheme, servers, serverChannels }) {
   const [currentUser, setCurrentUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
@@ -83,7 +83,11 @@ export default function Home({ toggleTheme, servers, serverChannels }) {
         />
       ) : (
         <>
-          <Servers toggleTheme={toggleTheme} servers={servers}></Servers>
+          <Servers
+            theme={theme}
+            toggleTheme={toggleTheme}
+            servers={servers}
+          ></Servers>
           <Channels
             servers={servers}
             serverChannels={serverChannels}

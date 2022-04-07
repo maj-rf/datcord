@@ -59,6 +59,7 @@ function App() {
                     toggleTheme={toggleTheme}
                     servers={servers}
                     serverChannels={serverChannels}
+                    theme={theme}
                   />
                 </ProtectedRoute>
               }

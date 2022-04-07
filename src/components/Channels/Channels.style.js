@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Settings } from '@styled-icons/evaicons-solid/Settings';
 import { Plus } from '@styled-icons/bootstrap/Plus';
-import { Close } from '@styled-icons/evaicons-solid/Close';
 const ChannelSection = styled.section`
   background-color: ${(props) => props.theme.accent};
   flex: 0 0 250px;
