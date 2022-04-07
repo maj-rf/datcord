@@ -5,10 +5,12 @@ import {
   ChannelList,
   ChannelUpper,
   ChannelLower,
-  ChannelBtn,
+  PlusBtn,
+  SettingsBtn,
 } from './Channels.style';
 import { NavLink } from 'react-router-dom';
 import User from '../User/User';
+
 function Channels({
   servers,
   serverChannels,
@@ -29,9 +31,11 @@ function Channels({
         <ChannelList>
           <div>
             <span>v Text Channel</span>
-            <ChannelBtn onClick={handleInputView}>
-              {showInput ? 'x' : '+'}
-            </ChannelBtn>
+            {showInput ? (
+              <PlusBtn size="30" onClick={handleInputView} close />
+            ) : (
+              <PlusBtn size="30" onClick={handleInputView} />
+            )}
           </div>
           {showInput && (
             <form onSubmit={addChannel}>
@@ -50,8 +54,7 @@ function Channels({
       </ChannelUpper>
       <ChannelLower>
         <User x={currentUser} primary />
-        <ChannelBtn onClick={handleProfileView}>Set</ChannelBtn>
-        {/* <button onClick={handleLogOut}>Logout</button> */}
+        <SettingsBtn size="30" onClick={handleProfileView} />
       </ChannelLower>
     </ChannelSection>
   );

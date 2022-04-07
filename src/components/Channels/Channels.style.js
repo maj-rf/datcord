@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-//import { StyledButton } from '../../styles/sharedStyles';
+import { Settings } from '@styled-icons/evaicons-solid/Settings';
+import { Plus } from '@styled-icons/bootstrap/Plus';
+import { Close } from '@styled-icons/evaicons-solid/Close';
 const ChannelSection = styled.section`
   background-color: ${(props) => props.theme.accent};
   flex: 0 0 250px;
@@ -56,15 +58,28 @@ const ChannelLower = styled.div`
   align-items: center;
 `;
 
-const ChannelBtn = styled.button`
-  max-width: 40px;
-  max-height: 40px;
+const SettingsBtn = styled(Settings)`
+  color: ${(props) => props.theme.text};
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transform: rotate(90deg);
+  }
 `;
+
+const PlusBtn = styled(Plus)`
+  color: ${(props) => props.theme.text};
+  cursor: pointer;
+  transform: ${(props) => (props.close ? 'rotate(45deg)' : '')};
+  transition: 0.3s ease-in-out;
+`;
+
 export {
   ChannelSection,
   ChannelHead,
   ChannelList,
   ChannelUpper,
   ChannelLower,
-  ChannelBtn,
+  SettingsBtn,
+  PlusBtn,
 };
