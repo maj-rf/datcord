@@ -63,11 +63,14 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
   const addChannel = async (e) => {
     e.preventDefault();
     try {
+      if (channelName === '' || channelName === ' ' || channelName.length < 3)
+        return alert('Cannot be blank and must be greater than 2 characters');
       await addDoc(collection(db, 'servers/1kU49xyjRsrEE6KlUXub', 'channels'), {
         name: channelName,
         createdAt: serverTimestamp(),
       });
       setShowInput(false);
+      setChannelName('');
     } catch (err) {
       console.log(err);
     }

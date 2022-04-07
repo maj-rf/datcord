@@ -45,7 +45,7 @@ function Channels({
           )}
           {serverChannels?.map((channel) => (
             <li key={channel.id}>
-              <NavLink to={`/home/${channel.id}`}>
+              <NavLink to={`/home/${channel.id}`} style={{ display: 'block' }}>
                 <span>#</span> {channel.name}
               </NavLink>
             </li>

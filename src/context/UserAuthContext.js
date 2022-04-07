@@ -31,7 +31,7 @@ export function UserAuthContextProvider({ children }) {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (x) => {
-      console.log('Auth', x);
+      //console.log('Auth', x);
       setUser(x);
     });
     return () => unsub();
