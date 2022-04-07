@@ -101,7 +101,7 @@ export default function ChatPanel({ serverChannels }) {
                 </li>
               );
             })}
-            <ScrollToBottom />
+            <ScrollToBottom channelMsgs={channelMsgs} />
           </>
         )}
       </ul>
