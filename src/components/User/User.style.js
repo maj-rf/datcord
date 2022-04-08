@@ -54,6 +54,7 @@ const UserInfo = styled.div`
   p:first-child {
     font-weight: ${(props) => (props.chat ? '900' : 'normal')};
     font-size: ${(props) => (props.chat ? '1.1rem' : 'inherit')};
+    color: #5765f2;
   }
 `;
 

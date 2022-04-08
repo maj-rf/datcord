@@ -7,8 +7,8 @@ const ChannelSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  /* @media screen and (max-width: 768px) {
+  height: 100vh;
+  /* @media screen and (max-width: 850px) {
     display: none;
   } */
 `;

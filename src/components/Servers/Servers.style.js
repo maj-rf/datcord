@@ -48,7 +48,7 @@ const StyledNav = styled.nav`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     display: none;
   }
 `;

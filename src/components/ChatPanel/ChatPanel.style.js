@@ -6,11 +6,32 @@ export const ChatSection = styled.section`
   flex-direction: column;
   justify-content: space-between;
   padding: 0;
-
+  height: 100vh;
   .channel-name {
-    padding: 0.5rem 1rem;
+    //display: flex;
+    padding: 0.5rem 1.5rem;
     border-bottom: 1px solid ${(props) => props.theme.secondary};
+    position: relative;
   }
+
+  /* .showLeftCont,
+  .showRightCont {
+    display: none;
+    @media screen and (max-width: 850px) {
+      display: block;
+    }
+  }
+
+  .showLeftCont {
+    position: absolute;
+    left: 0;
+  }
+
+  .showRightCont {
+    position: absolute;
+    right: 0;
+  } */
+
   ul {
     flex-basis: 100%;
     overflow-y: auto;

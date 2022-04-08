@@ -46,6 +46,8 @@ export default function ChatPanel({ serverChannels }) {
 
   async function sendMessage(e) {
     e.preventDefault();
+    const msg = message;
+    setMessage('');
     try {
       await addDoc(
         collection(
@@ -55,11 +57,10 @@ export default function ChatPanel({ serverChannels }) {
         ),
         {
           ownerId: currentUser.uid,
-          content: message,
+          content: msg,
           createdAt: serverTimestamp(),
         }
       );
-      setMessage('');
     } catch (err) {
       console.log(err);
     }
