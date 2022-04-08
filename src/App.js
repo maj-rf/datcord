@@ -6,7 +6,7 @@ import Register from './pages/Register/Register';
 import ProtectedRoute from './pages/ProtectedRoute.js/ProtectedRoute';
 import Home from './pages/Home/Home';
 import ChatPanel from './components/ChatPanel/ChatPanel';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import React, { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
@@ -49,7 +49,8 @@ function App() {
         <GlobalStyles />
         <UserAuthContextProvider>
           <Routes>
-            <Route path="/" element={<LogIn />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<Register />} />
             <Route
               path="/home"

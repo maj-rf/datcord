@@ -9,7 +9,7 @@ LogIn if user is not authenticated.
 export default function ProtectedRoute({ children }) {
   let { user } = useUserAuth();
   if (!user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
 
   return children;

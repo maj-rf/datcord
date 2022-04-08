@@ -38,7 +38,7 @@ export default function Register() {
         isOnline: false,
       });
       setData({ ...data, loading: false });
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       setData({ ...data, error: err.message.substring(9) });
     }
@@ -80,7 +80,7 @@ export default function Register() {
           <div>
             <p>
               Already have an account?{' '}
-              <Link to="/">
+              <Link to="/login">
                 <button type="button" className="redirect-btn">
                   Log In
                 </button>

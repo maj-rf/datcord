@@ -25,14 +25,15 @@ export function UserAuthContextProvider({ children }) {
   }
 
   function logOut() {
-    setUser(null);
     return signOut(auth);
   }
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (x) => {
-      //console.log('Auth', x);
-      setUser(x);
+      if (x) {
+        setUser(x);
+      } else setUser(null);
+      console.log(x);
     });
     return () => unsub();
   }, []);
