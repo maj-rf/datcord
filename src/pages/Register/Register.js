@@ -35,7 +35,7 @@ export default function Register() {
         uid: res.user.uid,
         email,
         createdAt: Timestamp.fromDate(new Date()),
-        isOnline: false,
+        isOnline: true,
       });
       setData({ ...data, loading: false });
       navigate('/home');
