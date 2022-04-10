@@ -8,11 +8,11 @@ const UserWrapper = styled.div`
   width: 100%;
   filter: opacity(${(props) => (props.offline ? '0.7' : '1')});
   .online {
-    background-color: #34eb52;
+    background-color: #399f59;
   }
 
   .offline {
-    background-color: #eb4034;
+    background-color: #a43d3e;
   }
 
   &:hover {
@@ -36,8 +36,8 @@ const ImgContainer = styled.div`
   .status-container {
     position: absolute;
     z-index: 1;
-    bottom: 0;
-    right: 2px;
+    bottom: -1px;
+    right: -1px;
     background-color: ${(props) => props.theme.accent};
     padding: 0.15rem;
     border-radius: 50%;
