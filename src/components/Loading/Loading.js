@@ -9,7 +9,7 @@ const spin = keyframes`
     transform: rotate(360deg);
   }`;
 const Spinner = styled.div`
-  border: 10px solid ${(props) => props.theme.body};
+  border: 10px solid ${(props) => props.theme.secondary};
   border-top: 10px solid ${(props) => props.theme.text};
   border-radius: 50%;
   width: 100px;
@@ -23,7 +23,7 @@ function Loading() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: '100%',
       }}
     >
       <Spinner />

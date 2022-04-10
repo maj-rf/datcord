@@ -40,7 +40,13 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <UserAuthContext.Provider value={{ user, signUp, logIn, logOut }}>
-      {load ? <Loading /> : children}
+      {load ? (
+        <div style={{ height: '100vh' }}>
+          <Loading />
+        </div>
+      ) : (
+        children
+      )}
     </UserAuthContext.Provider>
   );
 }
