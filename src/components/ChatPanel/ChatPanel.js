@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ChatSection } from './ChatPanel.style';
 import { ScrollToBottom } from '../ScrollToBottom/ScrollToBottom';
 import { useOutletContext, useParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 import User from '../User/User';
 import {
   onSnapshot,
@@ -73,16 +74,7 @@ export default function ChatPanel({ serverChannels }) {
       </div>
       <ul>
         {loading ? (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100%',
-            }}
-          >
-            Loading...
-          </div>
+          <Loading />
         ) : (
           <>
             <h1>

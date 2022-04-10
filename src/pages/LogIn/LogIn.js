@@ -1,5 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
@@ -33,7 +33,7 @@ export default function LogIn() {
     error: null,
     loading: false,
   });
-  const { logIn } = useUserAuth();
+  const { user, logIn } = useUserAuth();
   const { email, password, error, loading } = data;
 
   const handleChange = (e) => {
@@ -54,6 +54,18 @@ export default function LogIn() {
       setData({ ...data, error: err.message.substring(9) });
     }
   };
+
+  //reroute to home of user changes URL to login
+  useEffect(() => {
+    let unsub = true;
+    function goHome() {
+      if (user) return navigate('/home');
+    }
+    goHome();
+    return () => {
+      unsub = false;
+    };
+  }, [user, navigate]);
 
   return (
     <StyledSection>
