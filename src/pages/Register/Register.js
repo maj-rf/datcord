@@ -9,6 +9,7 @@ import {
   StyledForm,
   StyledDiv,
 } from '../../styles/sharedStyles';
+import generateName from '../../generateName';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function Register() {
         uid: res.user.uid,
         email,
         createdAt: Timestamp.fromDate(new Date()),
+        name: generateName(),
         isOnline: true,
       });
       setData({ ...data, loading: false });
