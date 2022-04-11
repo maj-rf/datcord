@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/datcord/static/css/main.cca2e1d6.css",
-    "main.js": "/datcord/static/js/main.f0d05b1b.js",
+    "main.js": "/datcord/static/js/main.ed73f25e.js",
     "static/media/mainbg.jpeg": "/datcord/static/media/mainbg.9e9d2692fac436ea4325.jpeg",
     "static/media/pp-svg.svg": "/datcord/static/media/pp-svg.5fe91ff931dc3e60a45a9fa50c85201f.svg",
     "index.html": "/datcord/index.html",
     "main.cca2e1d6.css.map": "/datcord/static/css/main.cca2e1d6.css.map",
-    "main.f0d05b1b.js.map": "/datcord/static/js/main.f0d05b1b.js.map"
+    "main.ed73f25e.js.map": "/datcord/static/js/main.ed73f25e.js.map"
   },
   "entrypoints": [
     "static/css/main.cca2e1d6.css",
-    "static/js/main.f0d05b1b.js"
+    "static/js/main.ed73f25e.js"
   ]
 }
