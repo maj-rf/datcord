@@ -49,7 +49,7 @@ const StyledNav = styled.nav`
   }
 
   @media screen and (max-width: 850px) {
-    display: none;
+    display: ${(props) => (props.showLeft ? 'block' : 'none')};
   }
 `;
 

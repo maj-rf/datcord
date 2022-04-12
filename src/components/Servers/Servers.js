@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyledNav } from './Servers.style';
 import { LightBtn, DarkBtn } from './Servers.style';
-function Servers({ theme, toggleTheme, servers }) {
+function Servers({ theme, toggleTheme, servers, showLeft }) {
   return (
-    <StyledNav>
+    <StyledNav showLeft={showLeft}>
       <ul>
         <li>
           <button onClick={toggleTheme}>
