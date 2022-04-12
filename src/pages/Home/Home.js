@@ -26,6 +26,8 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
   const [showProfile, setShowProfile] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [channelName, setChannelName] = useState('');
+  const [showRight, setShowRight] = useState(false);
+  const [showLeft, setShowLeft] = useState(false);
   const { user, logOut } = useUserAuth();
   const navigate = useNavigate();
   useEffect(() => {
@@ -42,8 +44,9 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
     return unsub;
   }, []);
 
+  const handleLeftNav = () => setShowLeft((prevState) => !prevState);
+  const handleRightNav = () => setShowRight((prevState) => !prevState);
   const handleProfileView = () => setShowProfile((prevState) => !prevState);
-
   const handleLogOut = async () => {
     try {
       await logOut();
@@ -57,9 +60,7 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
   };
 
   const handleInputView = () => setShowInput((prevState) => !prevState);
-
   const handleChange = (e) => setChannelName(e.target.value);
-
   const addChannel = async (e) => {
     e.preventDefault();
     try {
@@ -90,6 +91,7 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
             theme={theme}
             toggleTheme={toggleTheme}
             servers={servers}
+            showLeft={showLeft}
           ></Servers>
           <Channels
             servers={servers}
@@ -100,9 +102,12 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
             handleInputView={handleInputView}
             showInput={showInput}
             handleChange={handleChange}
+            showLeft={showLeft}
           />
-          <Outlet context={[currentUser, allUsers]} />
-          <UserPanel allUsers={allUsers} />
+          <Outlet
+            context={[currentUser, allUsers, handleRightNav, handleLeftNav]}
+          />
+          <UserPanel allUsers={allUsers} showRight={showRight} />
         </>
       )}
     </Wrapper>
