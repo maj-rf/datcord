@@ -62,9 +62,7 @@ export default function LogIn() {
       if (user) return navigate('/home');
     }
     goHome();
-    return () => {
-      unsub = false;
-    };
+    return () => unsub;
   }, [user, navigate]);
 
   return (
