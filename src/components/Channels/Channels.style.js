@@ -8,9 +8,9 @@ const ChannelSection = styled.section`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  /* @media screen and (max-width: 850px) {
-    display: none;
-  } */
+  @media screen and (max-width: 850px) {
+    display: ${(props) => (props.showLeft ? 'flex' : 'none')};
+  }
 `;
 
 const ChannelHead = styled.div`
@@ -23,6 +23,8 @@ const ChannelList = styled.div`
   flex-direction: column;
   padding: 0.5rem;
   gap: 0.5rem;
+  flex-basis: 100%;
+  overflow-y: auto;
 
   div:first-child {
     display: flex;
@@ -47,8 +49,6 @@ const ChannelList = styled.div`
     color: ${(props) => props.theme.hovertxt};
   }
 `;
-
-const ChannelUpper = styled.div``;
 
 const ChannelLower = styled.div`
   padding: 0.5rem 1rem;
@@ -77,7 +77,6 @@ export {
   ChannelSection,
   ChannelHead,
   ChannelList,
-  ChannelUpper,
   ChannelLower,
   SettingsBtn,
   PlusBtn,

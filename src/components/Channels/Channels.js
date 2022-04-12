@@ -3,7 +3,6 @@ import {
   ChannelSection,
   ChannelHead,
   ChannelList,
-  ChannelUpper,
   ChannelLower,
   PlusBtn,
   SettingsBtn,
@@ -20,38 +19,37 @@ function Channels({
   handleInputView,
   showInput,
   handleChange,
+  showLeft,
 }) {
   return (
-    <ChannelSection>
-      <ChannelUpper>
-        <ChannelHead>
-          <h3>{servers[0]?.name}</h3>
-        </ChannelHead>
+    <ChannelSection showLeft={showLeft}>
+      <ChannelHead>
+        <h3>{servers[0]?.name}</h3>
+      </ChannelHead>
 
-        <ChannelList>
-          <div>
-            <span>v Text Channel</span>
-            {showInput ? (
-              <PlusBtn size="30" onClick={handleInputView} close />
-            ) : (
-              <PlusBtn size="30" onClick={handleInputView} />
-            )}
-          </div>
-          {showInput && (
-            <form onSubmit={addChannel}>
-              <input onChange={handleChange} placeholder="Name..."></input>
-              <button type="submit">Create</button>
-            </form>
+      <ChannelList>
+        <div>
+          <span>v Text Channel</span>
+          {showInput ? (
+            <PlusBtn size="30" onClick={handleInputView} close />
+          ) : (
+            <PlusBtn size="30" onClick={handleInputView} />
           )}
-          {serverChannels?.map((channel) => (
-            <li key={channel.id}>
-              <NavLink to={`/home/${channel.id}`} style={{ display: 'block' }}>
-                <span>#</span> {channel.name}
-              </NavLink>
-            </li>
-          ))}
-        </ChannelList>
-      </ChannelUpper>
+        </div>
+        {showInput && (
+          <form onSubmit={addChannel}>
+            <input onChange={handleChange} placeholder="Name..."></input>
+            <button type="submit">Create</button>
+          </form>
+        )}
+        {serverChannels?.map((channel) => (
+          <li key={channel.id}>
+            <NavLink to={`/home/${channel.id}`} style={{ display: 'block' }}>
+              <span>#</span> {channel.name}
+            </NavLink>
+          </li>
+        ))}
+      </ChannelList>
       <ChannelLower>
         <User x={currentUser} primary />
         <SettingsBtn size="30" onClick={handleProfileView} />
