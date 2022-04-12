@@ -14,6 +14,7 @@ body {
   color: ${({ theme }) => theme.text};
   transition: all 0.5s linear;
   transition-property: color, background-color;
+  overflow-y: hidden;
 }
 
 *,
