@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-
+import { Menu } from '@styled-icons/entypo/Menu';
+import { Users } from '@styled-icons/fa-solid/Users';
 export const ChatSection = styled.section`
   flex-basis: 100%;
   display: flex;
@@ -8,18 +9,15 @@ export const ChatSection = styled.section`
   padding: 0;
   height: 100vh;
   .channel-name {
-    //display: flex;
-    padding: 0.5rem 1.5rem;
+    display: flex;
+    padding: 0.5rem 1rem;
     border-bottom: 1px solid ${(props) => props.theme.secondary};
     position: relative;
   }
 
-  /* .showLeftCont,
+  .showLeftCont,
   .showRightCont {
     display: none;
-    @media screen and (max-width: 850px) {
-      display: block;
-    }
   }
 
   .showLeftCont {
@@ -29,8 +27,8 @@ export const ChatSection = styled.section`
 
   .showRightCont {
     position: absolute;
-    right: 0;
-  } */
+    right: 10px;
+  }
 
   ul {
     flex-basis: 100%;
@@ -75,5 +73,34 @@ export const ChatSection = styled.section`
     border: none;
     outline: none;
     border-radius: 7px;
+  }
+
+  @media screen and (max-width: 850px) {
+    .showLeftCont,
+    .showRightCont {
+      display: block;
+    }
+
+    .channel-name {
+      padding: 0.5rem 1.8rem;
+    }
+  }
+`;
+
+export const MenuBtn = styled(Menu)`
+  color: ${(props) => props.theme.text};
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transform: rotate(10deg);
+  }
+`;
+
+export const UsersBtn = styled(Users)`
+  color: ${(props) => props.theme.text};
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transform: rotate(-10deg);
   }
 `;

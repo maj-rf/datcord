@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChatSection } from './ChatPanel.style';
+import { ChatSection, MenuBtn, UsersBtn } from './ChatPanel.style';
 import { ScrollToBottom } from '../ScrollToBottom/ScrollToBottom';
 import { useOutletContext, useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
@@ -20,7 +20,8 @@ export default function ChatPanel({ serverChannels }) {
   const [loading, setLoading] = useState(false);
   const currentChannel = [...serverChannels].filter((x) => x.id === channelId);
   const [message, setMessage] = useState('');
-  const [currentUser, allUsers] = useOutletContext(); //context hook from Outlet
+  const [currentUser, allUsers, handleRightNav, handleLeftNav] =
+    useOutletContext(); //context hook from Outlet
 
   useEffect(() => {
     setLoading(true);
@@ -70,7 +71,13 @@ export default function ChatPanel({ serverChannels }) {
   return (
     <ChatSection>
       <div className="channel-name">
+        <div className="showLeftCont">
+          <MenuBtn size="25" onClick={handleLeftNav} />
+        </div>
         <h3>#{currentChannel[0]?.name}</h3>
+        <div className="showRightCont">
+          <UsersBtn size="25" onClick={handleRightNav} />
+        </div>
       </div>
       <ul>
         {loading ? (
