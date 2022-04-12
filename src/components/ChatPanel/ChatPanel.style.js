@@ -90,17 +90,17 @@ export const ChatSection = styled.section`
 export const MenuBtn = styled(Menu)`
   color: ${(props) => props.theme.text};
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.5s ease-in-out;
   &:hover {
-    transform: rotate(10deg);
+    filter: opacity(0.7);
   }
 `;
 
 export const UsersBtn = styled(Users)`
   color: ${(props) => props.theme.text};
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.5s ease-in-out;
   &:hover {
-    transform: rotate(-10deg);
+    filter: opacity(0.7);
   }
 `;
