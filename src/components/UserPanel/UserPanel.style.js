@@ -7,6 +7,6 @@ export const UserPanelSection = styled.section`
   padding: 0.5rem;
   overflow-y: auto;
   @media screen and (max-width: 850px) {
-    display: none;
+    display: ${(props) => (props.showRight ? 'block' : 'none')};
   }
 `;

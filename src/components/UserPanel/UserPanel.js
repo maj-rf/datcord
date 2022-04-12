@@ -2,11 +2,11 @@ import React from 'react';
 import { UserPanelSection } from './UserPanel.style';
 import User from '../User/User';
 
-function UserPanel({ allUsers }) {
+function UserPanel({ allUsers, showRight }) {
   const online = [...allUsers].filter((user) => user.isOnline);
   const offline = [...allUsers].filter((user) => user.isOnline === false);
   return (
-    <UserPanelSection>
+    <UserPanelSection showRight={showRight}>
       <div>
         <p>ONLINE - {online.length}</p>
         {online.map((x) => (
