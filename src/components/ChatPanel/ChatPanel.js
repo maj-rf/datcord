@@ -100,17 +100,18 @@ export default function ChatPanel({ serverChannels }) {
       </ul>
       <div className="msg-container">
         <form onSubmit={sendMessage}>
-          <input
-            type="text"
-            placeholder="Message..."
-            onChange={handleChange}
-            value={
-              currentChannel[0]?.id === 'NyrtCoRvt0WIHPJMHwyv'
-                ? 'You do not have permission to send messages here.'
-                : message
-            }
-            disabled={currentChannel[0]?.id === 'NyrtCoRvt0WIHPJMHwyv'}
-          />
+          {currentChannel[0]?.id === 'NyrtCoRvt0WIHPJMHwyv' ? (
+            <div className="admin-msg">
+              <p>Permission denied...</p>
+            </div>
+          ) : (
+            <input
+              type="text"
+              placeholder="Message..."
+              onChange={handleChange}
+              value={message}
+            />
+          )}
         </form>
       </div>
     </ChatSection>

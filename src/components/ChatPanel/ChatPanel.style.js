@@ -52,12 +52,22 @@ export const ChatSection = styled.section`
       }
     }
   }
+  .admin-msg {
+    padding: 0.5rem;
+    min-width: 100%;
+    height: 50px;
+    background-color: ${(props) => props.theme.form};
+    color: ${(props) => props.theme.text};
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+  }
   .msg-container {
     padding: 0.5rem 1rem;
   }
   input {
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     min-width: 100%;
     height: 50px;
     background-color: ${(props) => props.theme.form};
@@ -65,8 +75,5 @@ export const ChatSection = styled.section`
     border: none;
     outline: none;
     border-radius: 7px;
-    &:disabled {
-      filter: brightness(0.7);
-    }
   }
 `;
