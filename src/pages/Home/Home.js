@@ -1,8 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Servers from '../../components/Servers/Servers';
-import Channels from '../../components/Channels/Channels';
-import UserPanel from '../../components/UserPanel/UserPanel';
-import Profile from '../../components/Profile/Profile';
+import React, { useState, useEffect, Suspense } from 'react';
 import styled from 'styled-components';
 import { useUserAuth } from '../../context/UserAuthContext';
 import {
@@ -20,6 +16,13 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
 `;
+
+const Servers = React.lazy(() => import('../../components/Servers/Servers'));
+const Channels = React.lazy(() => import('../../components/Channels/Channels'));
+const UserPanel = React.lazy(() =>
+  import('../../components/UserPanel/UserPanel')
+);
+const Profile = React.lazy(() => import('../../components/Profile/Profile'));
 export default function Home({ theme, toggleTheme, servers, serverChannels }) {
   const [currentUser, setCurrentUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -87,27 +90,29 @@ export default function Home({ theme, toggleTheme, servers, serverChannels }) {
         />
       ) : (
         <>
-          <Servers
-            theme={theme}
-            toggleTheme={toggleTheme}
-            servers={servers}
-            showLeft={showLeft}
-          ></Servers>
-          <Channels
-            servers={servers}
-            serverChannels={serverChannels}
-            currentUser={currentUser}
-            handleProfileView={handleProfileView}
-            addChannel={addChannel}
-            handleInputView={handleInputView}
-            showInput={showInput}
-            handleChange={handleChange}
-            showLeft={showLeft}
-          />
-          <Outlet
-            context={[currentUser, allUsers, handleRightNav, handleLeftNav]}
-          />
-          <UserPanel allUsers={allUsers} showRight={showRight} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Servers
+              theme={theme}
+              toggleTheme={toggleTheme}
+              servers={servers}
+              showLeft={showLeft}
+            ></Servers>
+            <Channels
+              servers={servers}
+              serverChannels={serverChannels}
+              currentUser={currentUser}
+              handleProfileView={handleProfileView}
+              addChannel={addChannel}
+              handleInputView={handleInputView}
+              showInput={showInput}
+              handleChange={handleChange}
+              showLeft={showLeft}
+            />
+            <Outlet
+              context={[currentUser, allUsers, handleRightNav, handleLeftNav]}
+            />
+            <UserPanel allUsers={allUsers} showRight={showRight} />
+          </Suspense>
         </>
       )}
     </Wrapper>
