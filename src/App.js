@@ -6,6 +6,7 @@ import useDarkMode from './hooks/useDarkMode';
 import ProtectedRoute from './pages/ProtectedRoute.js/ProtectedRoute';
 //import Home from './pages/Home/Home';
 //import ChatPanel from './components/ChatPanel/ChatPanel';
+import Loading from './components/Loading/Loading';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import React, { useEffect, useState, Suspense } from 'react';
@@ -52,7 +53,13 @@ function App() {
       <ThemeProvider theme={themeMode}>
         <GlobalStyles />
         <UserAuthContextProvider>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div style={{ height: '100vh' }}>
+                <Loading />
+              </div>
+            }
+          >
             <Routes>
               <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/login" element={<LogIn />} />
