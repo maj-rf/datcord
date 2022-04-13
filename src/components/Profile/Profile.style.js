@@ -13,11 +13,15 @@ const ProfileInner = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 100vw;
-  background-color: ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.hovertxt};
   color: ${(props) => props.theme.body};
   padding: 1.5rem;
   gap: 1rem;
   border-radius: 7px;
+
+  input {
+    padding: 0.2rem;
+  }
 `;
 
 export { ProfileWrapper, ProfileInner };

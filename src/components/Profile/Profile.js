@@ -5,6 +5,7 @@ import { StyledButton } from '../../styles/sharedStyles';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+
 function Profile({ handleProfileView, handleLogOut, currentUser }) {
   const { user } = useUserAuth();
   const [isEditing, setIsEditing] = useState(false);
@@ -45,9 +46,10 @@ function Profile({ handleProfileView, handleLogOut, currentUser }) {
           {isEditing ? (
             <form onSubmit={updateName}>
               <input placeholder="Name..." onChange={handleChange}></input>
-              <button onClick={() => setIsEditing(false)} type="button">
+              <StyledButton> Send </StyledButton>
+              <StyledButton onClick={() => setIsEditing(false)} type="button">
                 &#10005;
-              </button>
+              </StyledButton>
             </form>
           ) : (
             <>
