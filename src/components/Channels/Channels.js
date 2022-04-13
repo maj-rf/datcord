@@ -7,6 +7,7 @@ import {
   PlusBtn,
   SettingsBtn,
 } from './Channels.style';
+import { StyledButton } from '../../styles/sharedStyles';
 import { NavLink } from 'react-router-dom';
 import User from '../User/User';
 
@@ -39,7 +40,7 @@ function Channels({
         {showInput && (
           <form onSubmit={addChannel}>
             <input onChange={handleChange} placeholder="Name..."></input>
-            <button type="submit">Create</button>
+            <StyledButton type="submit">Create</StyledButton>
           </form>
         )}
         {serverChannels?.map((channel) => (

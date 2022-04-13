@@ -48,6 +48,10 @@ const ChannelList = styled.div`
     background-color: ${(props) => props.theme.hoverbg};
     color: ${(props) => props.theme.hovertxt};
   }
+
+  input {
+    padding: 0.3rem;
+  }
 `;
 
 const ChannelLower = styled.div`
