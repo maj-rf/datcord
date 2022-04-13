@@ -1,6 +1,6 @@
 # Project: Datcord - A Discord Clone
 
-![Imgur](https://imgur.com/zlSAMWu)
+![Imgur](https://i.imgur.com/zlSAMWu.png)
 
 ## Features and Functionalites
 
