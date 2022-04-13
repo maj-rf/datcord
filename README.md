@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Project: Datcord - A Discord Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Imgur](https://imgur.com/zlSAMWu)
 
-## Available Scripts
+## Features and Functionalites
 
-In the project directory, you can run:
+A Social Media Messaging App which features some of the core functionalities of Discord.
 
-### `npm start`
+- Register to gain access to the app.
+- Join a single test server consisting of authenticated users.
+- Create channels inside the server.
+- Talk via text on each created channels
+- Check users who are online/offline.
+- Update your Profile
+- Log-in/Log-out
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Objectives and Outcomes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This is my 2nd Full Stack app made after the Photo-Tagging App. I got to learn more and be better at using Firebase. This is my last project before I delve into the Backend stuff.
 
-### `npm test`
+Some of the hurdles along the way:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Routing with `react-router-dom`. I had to figure out nested routing. Clicking one of the `channels` should only re-render/route to the `ChatPanel` component that corresponds to the channel. Thankfully, the docs were enough. Got to use `Outlet` and `useOutletContext`. Pretty nice!
 
-### `npm run build`
+2. Authentication. It was a bit hard for me since Firebase docs for me isn't clear enough. I learned how to make an `AuthContextProvider` that consists of all the Auth actions like `login` or `logout`. Also learned more about Firestore rules.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Talking to the Database (`Firestore`). Was really nice playing with all the Firebase Store actions like `onSnapshot`, `getDocs`, etc. Not as hard as the Auth.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. User Interface. `CSS` will always be my final boss. The mobile view isn't 100% responsive yet.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage / Running the Project Locally.
 
-### `npm run eject`
+1. Clone the repository. (`git clone ...`)
+2. Install/Update `node_modules` in the project directory. (`npm install`)
+3. Create a Firebase Web App in Google Firebase.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Development
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Made with mainly ReactJS and bootsrapped with `create-react-app`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- React / CRA
+- `styled-components`
+- `react-router-dom` for routing pages.
+- `Google Firebase` as backend.
+- `Jest` for testing.
+- `react-testing-library` for testing.
+- `unique-names-generator` to randomly create usernames.
+- `styled-icons` for the awesome icons.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Future Updates
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[] Implement changing display/profile picture.
+[] UI/UX improvements especially on mobile.
+[] Performance updates.
+[] More testing!
