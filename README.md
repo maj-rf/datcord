@@ -51,7 +51,7 @@ Made with mainly ReactJS and bootsrapped with `create-react-app`.
 
 ## Future Updates
 
--[] Implement changing display/profile picture.
--[] UI/UX improvements especially on mobile.
--[] Performance updates.
--[] More testing!
+- [] Implement changing display/profile picture.
+- [] UI/UX improvements especially on mobile.
+- [] Performance updates.
+- [] More testing!
