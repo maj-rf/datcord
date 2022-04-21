@@ -33,6 +33,8 @@ Some of the hurdles along the way:
 1. Clone the repository. (`git clone ...`)
 2. Install/Update `node_modules` in the project directory. (`npm install`)
 3. Create a Firebase Web App in Google Firebase.
+4. Copy the configs into `firebase-config.js`.
+5. Run the app. (`npm start`)
 
 ## Development
 
@@ -49,7 +51,7 @@ Made with mainly ReactJS and bootsrapped with `create-react-app`.
 
 ## Future Updates
 
-[] Implement changing display/profile picture.
-[] UI/UX improvements especially on mobile.
-[] Performance updates.
-[] More testing!
+[ ] Implement changing display/profile picture.
+[ ] UI/UX improvements especially on mobile.
+[ ] Performance updates.
+[ ] More testing!
